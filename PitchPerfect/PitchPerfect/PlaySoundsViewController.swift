@@ -13,15 +13,33 @@ import UIKit
 
 class PlaySoundsViewController: UIViewController {
 
+    // UI elements:
+    @IBOutlet weak var slowButton: UIButton!
+    @IBOutlet weak var fastButton: UIButton!
+    @IBOutlet weak var highPitchButton: UIButton!
+    @IBOutlet weak var lowPitchButton: UIButton!
+    @IBOutlet weak var echoButton: UIButton!
+    @IBOutlet weak var reverbButton: UIButton!
+    
+    // Audio delegate:
     var recordedAudioURL: URL!;
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        print("PlaySoundsViewController started up OK...");
     }
     
-
+    /* Custom methods */
+    @IBAction func playSoundForButton(_ sender: UIButton) {
+        print("Play sound buttons is pressed!");
+    }
+    
+    @IBAction func stopButtonPressed(_ sender: Any) {
+        print("Stop button at the bottom of PlaySoundViewController pressed!");
+    }
+    
+    
     /*
     // MARK: - Navigation
 

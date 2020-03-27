@@ -121,6 +121,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uke-nr-YXN" userLabel="Reverb Button">
                                                 <rect key="frame" x="191" y="0.0" width="191" height="250"/>
                                                 <state key="normal" image="Reverb"/>
+                                                <connections>
+                                                    <action selector="playSoundForButton:" destination="MrE-6A-Fdc" eventType="touchUpInside" id="XPy-kw-Skv"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -135,7 +138,7 @@
                                 </constraints>
                                 <state key="normal" image="Stop"/>
                                 <connections>
-                                    <action selector="stopButtonPressed:" destination="MrE-6A-Fdc" eventType="touchUpInside" id="vnN-XI-WGg"/>
+                                    <action selector="stopButtonPressed:" destination="MrE-6A-Fdc" eventType="touchUpInside" id="plf-ht-z1n"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -151,6 +154,14 @@
                         <viewLayoutGuide key="safeArea" id="SqX-kT-uj1"/>
                     </view>
                     <navigationItem key="navigationItem" id="wNJ-7Q-hlJ"/>
+                    <connections>
+                        <outlet property="echoButton" destination="n2k-gj-xcx" id="W7M-vk-WUi"/>
+                        <outlet property="fastButton" destination="6Oe-Fa-o1J" id="wZG-O1-i7d"/>
+                        <outlet property="highPitchButton" destination="PFm-GA-qEy" id="oZK-79-PGD"/>
+                        <outlet property="lowPitchButton" destination="XO6-KX-PrD" id="dtw-hj-vED"/>
+                        <outlet property="reverbButton" destination="Uke-nr-YXN" id="Rf0-0U-Dni"/>
+                        <outlet property="slowButton" destination="FrZ-sD-bst" id="HuY-89-mrj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azR-9p-fey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
