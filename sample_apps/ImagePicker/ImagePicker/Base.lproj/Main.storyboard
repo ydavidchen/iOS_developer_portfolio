@@ -15,19 +15,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPb-hU-yrS">
-                                <rect key="frame" x="162" y="433" width="90" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPb-hU-yrS">
+                                <rect key="frame" x="162" y="438" width="90" height="30"/>
                                 <state key="normal" title="Show Gallery"/>
                                 <connections>
-                                    <action selector="experiment" destination="BYZ-38-t0r" eventType="touchUpInside" id="6DR-I7-G8e"/>
+                                    <action selector="showGallery" destination="BYZ-38-t0r" eventType="touchUpInside" id="veQ-Ad-XwW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fO-81-zNX">
+                                <rect key="frame" x="144.5" y="493" width="125" height="30"/>
+                                <state key="normal" title="Show me an Alert!"/>
+                                <connections>
+                                    <action selector="showAlert" destination="BYZ-38-t0r" eventType="touchUpInside" id="51L-x0-csn"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="rPb-hU-yrS" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Iho-L8-dcf"/>
+                            <constraint firstItem="4fO-81-zNX" firstAttribute="top" secondItem="rPb-hU-yrS" secondAttribute="bottom" constant="25" id="PIp-yQ-J2U"/>
+                            <constraint firstItem="rPb-hU-yrS" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="QZn-rq-Kt2"/>
+                            <constraint firstItem="rPb-hU-yrS" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="cUP-Hp-Ghf"/>
+                            <constraint firstItem="4fO-81-zNX" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="wtt-TO-QuS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="showAlertButton" destination="4fO-81-zNX" id="BGH-Qm-p7N"/>
                         <outlet property="showGalleryButton" destination="rPb-hU-yrS" id="5Hs-b2-Xp2"/>
                     </connections>
                 </viewController>
