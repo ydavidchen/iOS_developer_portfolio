@@ -161,6 +161,7 @@
                         <outlet property="lowPitchButton" destination="XO6-KX-PrD" id="dtw-hj-vED"/>
                         <outlet property="reverbButton" destination="Uke-nr-YXN" id="Rf0-0U-Dni"/>
                         <outlet property="slowButton" destination="FrZ-sD-bst" id="HuY-89-mrj"/>
+                        <outlet property="stopButton" destination="NZj-AS-WBb" id="6r5-rd-MXb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azR-9p-fey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

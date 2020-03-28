@@ -9,28 +9,53 @@
 // This file is created with auto-populated content by Swift/Xcode
 // Need to manually wire it up with the ViewController in Main.storybord
 
-import UIKit
+/* We will also make use of a class extension, given by Udacity */
+
+
+import UIKit;
+import AVFoundation;
 
 class PlaySoundsViewController: UIViewController {
-
     // UI elements:
-    @IBOutlet weak var slowButton: UIButton!
-    @IBOutlet weak var fastButton: UIButton!
-    @IBOutlet weak var highPitchButton: UIButton!
-    @IBOutlet weak var lowPitchButton: UIButton!
-    @IBOutlet weak var echoButton: UIButton!
-    @IBOutlet weak var reverbButton: UIButton!
+    @IBOutlet weak var slowButton: UIButton!;
+    @IBOutlet weak var fastButton: UIButton!;
+    @IBOutlet weak var highPitchButton: UIButton!;
+    @IBOutlet weak var lowPitchButton: UIButton!;
+    @IBOutlet weak var echoButton: UIButton!;
+    @IBOutlet weak var reverbButton: UIButton!;
     
-    // Audio delegate:
+    @IBOutlet weak var stopButton: UIButton!
+    
+    // Audio delegate: (Lesson 4)
     var recordedAudioURL: URL!;
     
+    // Objects to be used by class extension given by Udacity instructor: (Lesson 5.10)
+    var audioFile: AVAudioFile!;
+    var audioEngine: AVAudioEngine!;
+    var audioPlayerNode: AVAudioPlayerNode!;
+    var stopTimer: Timer!;
+
+    enum ButtonType: Int{case slow=0, fast, chipmunk, vader, echo, reverb};
+
+    
+    /*
+     Override existing functions by adding Extension's functionality
+     Lesson 5.10
+     */
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        super.viewDidLoad();
         print("PlaySoundsViewController started up OK...");
+        setupAudio(); //extension method
     }
     
-    /* Custom methods */
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        configureUI(.notPlaying); //extension method, pass in the not-playing state
+    }
+    
+    /*
+     Custom methods invoking UI changes
+     */
     @IBAction func playSoundForButton(_ sender: UIButton) {
         print("Play sound buttons is pressed!");
     }
@@ -38,16 +63,4 @@ class PlaySoundsViewController: UIViewController {
     @IBAction func stopButtonPressed(_ sender: Any) {
         print("Stop button at the bottom of PlaySoundViewController pressed!");
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
