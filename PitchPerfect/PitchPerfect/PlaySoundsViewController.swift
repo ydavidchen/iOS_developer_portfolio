@@ -60,20 +60,20 @@ class PlaySoundsViewController: UIViewController {
         
         // Refer to tag created:
         switch(BUTTONTYPE(rawValue: sender.tag)!) {
-            case .slow:
-                playSound(rate: 0.5);
-            case .fast:
-                playSound(rate: 1.5);
+        case .slow:
+            playSound(rate: 0.5);
+        case .fast:
+            playSound(rate: 1.5);
             
-            case .highPitch:
-                playSound(pitch: 1000);
-            case .lowPitch:
-                playSound(pitch: -1000);
+        case .highPitch:
+            playSound(pitch: 1000);
+        case .lowPitch:
+            playSound(pitch: -1000);
             
-            case .echo:
-                playSound(echo: true);
-            case .reverb:
-                playSound(reverb: true);
+        case .echo:
+            playSound(echo: true);
+        case .reverb:
+            playSound(reverb: true);
         }
         
         configureUI(.playing);

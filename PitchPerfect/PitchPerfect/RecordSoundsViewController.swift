@@ -35,7 +35,6 @@ class RecordSoundsViewController:UIViewController, AVAudioRecorderDelegate {
     /* Start-up functionality */
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
-        print("viewWillAppear is called");
     }
     
     override func viewDidLoad() {
@@ -44,7 +43,7 @@ class RecordSoundsViewController:UIViewController, AVAudioRecorderDelegate {
     }
     
     
-    /* Audio Record functionality in AVFoundation */
+    //MARK: Audio Record functionality in AVFoundation
     @IBAction func recordAudio(_ sender: AnyObject) {
         recordingLabel.text = "Recording in progress";
         stopRecordingButton.isEnabled = true;
@@ -76,10 +75,7 @@ class RecordSoundsViewController:UIViewController, AVAudioRecorderDelegate {
         try! audioSession.setActive(false) //inactivate sharedSession
     }
 
-    /*
-     Required method for the AV audio delegate protocol/interface
-     Triggers the segway
-     */
+    //MARK: Triggers the segway (required by interface)
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         // Add a segway:
         if flag { //if successful...
@@ -93,13 +89,12 @@ class RecordSoundsViewController:UIViewController, AVAudioRecorderDelegate {
         }
     }
     
-    /* Prepares the segway when the segway is called ?? */
+    // MARK: Prepares the segway when the segway is called
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Upcast the destination controller to the target ViewController
         let playSoundVC = segue.destination as! PlaySoundsViewController;
         let recordedAudioURL = sender as! URL;
         playSoundVC.recordedAudioURL = recordedAudioURL; //receives the URL, ready for playback
-        
     }
 }
 
