@@ -1,22 +1,19 @@
-//
 //  PlaySoundsViewController.swift
 //  PitchPerfect
-//
 //  Created by DavidKevinChen on 3/26/20.
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
-//
 
-// This file is created with auto-populated content by Swift/Xcode
-// Need to manually wire it up with the ViewController in Main.storybord
-
-/* We will also make use of a class extension, given by Udacity */
-
+/* Notes
+This file is created with auto-populated content by Swift/Xcode
+Need to manually wire it up with the ViewController in Main.storybord
+The code make use of a class extension, given by Udacity
+ */
 
 import UIKit;
 import AVFoundation;
 
 class PlaySoundsViewController: UIViewController {
-    // UI elements:
+    //MARK: - UI elements:
     @IBOutlet weak var slowButton: UIButton!;
     @IBOutlet weak var fastButton: UIButton!;
     @IBOutlet weak var highPitchButton: UIButton!;
@@ -26,45 +23,38 @@ class PlaySoundsViewController: UIViewController {
     
     @IBOutlet weak var stopButton: UIButton!
     
-    // Audio delegate: (Lesson 4)
+    /* MARK: - Constants */
     var recordedAudioURL: URL!;
+    enum ButtonType: Int{case slow=0, fast, highPitch, lowPitch, echo, reverb};
     
-    // Objects to be used by class extension given by Udacity instructor: (Lesson 5.10)
+    //MARK: - Initialize properties to be used by class extension (ref: Lesson 5.10)
     var audioFile: AVAudioFile!;
     var audioEngine: AVAudioEngine!;
     var audioPlayerNode: AVAudioPlayerNode!;
     var stopTimer: Timer!;
-
-    enum BUTTONTYPE: Int{case slow=0, fast, highPitch, lowPitch, echo, reverb};
-
-    /*
-     Override existing functions by adding Extension's functionality
-     Lesson 5.10
-     */
+    
+    /* MARK: - Override existing functions by adding Extension's functionality (ref. Lesson 5.10) */
     override func viewDidLoad() {
         super.viewDidLoad();
         print("PlaySoundsViewController started up OK...");
-        setupAudio(); //extension method
+        setupAudio(); //from extension
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
-        configureUI(.notPlaying); //extension method, pass in the not-playing state
+        configureUI(.notPlaying); //from extension
     }
     
-    /*
-     Custom methods invoking UI changes
-     */
+    /* MARK: - Custom methods invoking UI changes */
     @IBAction func playSoundForButton(_ sender: UIButton) {
         print("Play sound buttons is pressed!");
         
-        // Refer to tag created:
-        switch(BUTTONTYPE(rawValue: sender.tag)!) {
+        switch(ButtonType(rawValue: sender.tag)!) {
         case .slow:
             playSound(rate: 0.5);
         case .fast:
             playSound(rate: 1.5);
-            
+        
         case .highPitch:
             playSound(pitch: 1000);
         case .lowPitch:
@@ -76,11 +66,11 @@ class PlaySoundsViewController: UIViewController {
             playSound(reverb: true);
         }
         
-        configureUI(.playing);
+        configureUI(.playing); //from extension
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
         print("Stop button at the bottom of PlaySoundViewController pressed!");
-        stopAudio(); //extension function that invokes AVFundation
+        stopAudio(); //from extension
     }
 }

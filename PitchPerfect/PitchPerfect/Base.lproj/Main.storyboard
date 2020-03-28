@@ -104,10 +104,16 @@
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFm-GA-qEy" userLabel="HighPitchButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="191" height="250"/>
                                                 <state key="normal" image="HighPitch"/>
+                                                <connections>
+                                                    <action selector="playSoundForButton:" destination="MrE-6A-Fdc" eventType="touchUpInside" id="EfX-Pg-Q9F"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XO6-KX-PrD" userLabel="LowPitchButton">
                                                 <rect key="frame" x="191" y="0.0" width="191" height="250"/>
                                                 <state key="normal" image="LowPitch"/>
+                                                <connections>
+                                                    <action selector="playSoundForButton:" destination="MrE-6A-Fdc" eventType="touchUpInside" id="AsM-bi-CSl"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -117,6 +123,9 @@
                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2k-gj-xcx" userLabel="Echo Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="191" height="250"/>
                                                 <state key="normal" image="Echo"/>
+                                                <connections>
+                                                    <action selector="playSoundForButton:" destination="MrE-6A-Fdc" eventType="touchUpInside" id="bPm-IM-Das"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uke-nr-YXN" userLabel="Reverb Button">
                                                 <rect key="frame" x="191" y="0.0" width="191" height="250"/>
