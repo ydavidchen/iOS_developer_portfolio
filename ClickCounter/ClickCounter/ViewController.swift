@@ -1,12 +1,13 @@
-//  Sample App in preparation for MemeMe Project
+//  Sample App in preparation for the MemeMe Project
 //  ViewController.swift
 //  ClickCounter
 //
 //  Created by DavidKevinChen on 3/27/20.
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
-//
 
-// Do this project without manually handle Storyboard
+/* Notes
+Start without manually handle Storyboard
+ */
 
 import UIKit
 
@@ -14,13 +15,12 @@ import UIKit
 class ViewController: UIViewController {
     //MARK: Properties
     var count = 0;
-    var label: UILabel!; //optional/conditional type required on init.
+    var label: UILabel!;
     var mirror: UILabel!;
     
-    //MARK: Recall runs onStart
+    //MARK: - Customize onstart methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         // Example Storyboard-less maneuver: Label
         let label = UILabel();
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         view.addSubview(label);
         self.label = label;
         
-        // Example 2: Button with incrementCount() as target action
+        // Example 2: Button with callback (addTarget - incrementCount)
         let button = UIButton();
         button.frame = CGRect(x:150, y:250, width:100, height: 100);
         button.setTitle("Click: +1", for: .normal);
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         decButton.addTarget(self, action:#selector(ViewController.decrementCount), for:UIControl.Event.touchUpInside);
     }
     
-    /* MARK: Methods */
+    /* MARK: - Methods */
     @objc func incrementCount() {
         self.count += 1;
         displayCurrCount();
@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         toggleBackCol();
     }
     
-    /* MARK: Helper functions */
+    /* MARK: - Helper functions */
     @objc func displayCurrCount() {
         self.label.text = "\(self.count)";
         self.mirror.text = self.label.text;
