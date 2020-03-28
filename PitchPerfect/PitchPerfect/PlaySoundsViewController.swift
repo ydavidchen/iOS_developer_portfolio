@@ -35,9 +35,8 @@ class PlaySoundsViewController: UIViewController {
     var audioPlayerNode: AVAudioPlayerNode!;
     var stopTimer: Timer!;
 
-    enum ButtonType: Int{case slow=0, fast, chipmunk, vader, echo, reverb};
+    enum BUTTONTYPE: Int{case slow=0, fast, highPitch, lowPitch, echo, reverb};
 
-    
     /*
      Override existing functions by adding Extension's functionality
      Lesson 5.10
@@ -58,9 +57,30 @@ class PlaySoundsViewController: UIViewController {
      */
     @IBAction func playSoundForButton(_ sender: UIButton) {
         print("Play sound buttons is pressed!");
+        
+        // Refer to tag created:
+        switch(BUTTONTYPE(rawValue: sender.tag)!) {
+            case .slow:
+                playSound(rate: 0.5);
+            case .fast:
+                playSound(rate: 1.5);
+            
+            case .highPitch:
+                playSound(pitch: 1000);
+            case .lowPitch:
+                playSound(pitch: -1000);
+            
+            case .echo:
+                playSound(echo: true);
+            case .reverb:
+                playSound(reverb: true);
+        }
+        
+        configureUI(.playing);
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
         print("Stop button at the bottom of PlaySoundViewController pressed!");
+        stopAudio(); //extension function that invokes AVFundation
     }
 }
