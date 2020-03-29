@@ -1,10 +1,8 @@
-//
 //  ViewController.swift
 //  ImagePicker2
 //
 //  Created by DavidKevinChen on 3/29/20.
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
-//
 
 import UIKit;
 
@@ -20,7 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        // Set initial texts:
+        // Set initial textfields' attributes
         topTextField.text = "TOP";
         bottomTextField.text = "BOTTOM";
         topTextField.textAlignment = NSTextAlignment.center;
@@ -50,26 +48,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         }
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        //
-    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {}
     
     //TODO: - Camera button?
     
     /* MARK: - Text Field Delegate Contract */
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if topTextField.text != "" {
-            topTextField.text = "";
-        } else if bottomTextField.text != "" {
-            bottomTextField.text = "";
+        if textField.text != "" {
+            textField.text = "";
         } else {
             print(ERROR_TAG);
         }
     }
   
+    func textFieldDidEndEditing(_ textField: UITextField) {}
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        topTextField.resignFirstResponder();
-        bottomTextField.resignFirstResponder();
+        textField.resignFirstResponder();
         return true;
     }
 }

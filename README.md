@@ -1,6 +1,4 @@
-# Udacity iOS Developer Nanodegree Projects
-
-Udacity Student: David Chen (GitHub @ydavidchen)
+# Udacity _iOS Developer_ Nanodegree Project Portfolio
 
 Notes:
   - Xcode v11E146
