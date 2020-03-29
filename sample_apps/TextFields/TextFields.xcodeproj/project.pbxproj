@@ -15,6 +15,7 @@
 		4D08C4901A126EC400A95F43 /* EmojiTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D08C48F1A126EC400A95F43 /* EmojiTextFieldDelegate.swift */; };
 		4D08C4921A12860200A95F43 /* ColorizerTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D08C4911A12860200A95F43 /* ColorizerTextFieldDelegate.swift */; };
 		A6AD1F9E243025ED00F2C33D /* RandomColorTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AD1F9D243025ED00F2C33D /* RandomColorTextFieldDelegate.swift */; };
+		A6AD1FA2243042A200F2C33D /* PriceFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AD1FA1243042A200F2C33D /* PriceFieldDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		4D08C48F1A126EC400A95F43 /* EmojiTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTextFieldDelegate.swift; sourceTree = "<group>"; };
 		4D08C4911A12860200A95F43 /* ColorizerTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorizerTextFieldDelegate.swift; sourceTree = "<group>"; };
 		A6AD1F9D243025ED00F2C33D /* RandomColorTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomColorTextFieldDelegate.swift; sourceTree = "<group>"; };
+		A6AD1FA1243042A200F2C33D /* PriceFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFieldDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				4D08C48F1A126EC400A95F43 /* EmojiTextFieldDelegate.swift */,
 				4D08C4911A12860200A95F43 /* ColorizerTextFieldDelegate.swift */,
 				A6AD1F9D243025ED00F2C33D /* RandomColorTextFieldDelegate.swift */,
+				A6AD1FA1243042A200F2C33D /* PriceFieldDelegate.swift */,
 			);
 			name = "Text Field Delegates";
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6AD1FA2243042A200F2C33D /* PriceFieldDelegate.swift in Sources */,
 				4D08C4921A12860200A95F43 /* ColorizerTextFieldDelegate.swift in Sources */,
 				4D08C4721A126D0300A95F43 /* ViewController.swift in Sources */,
 				4D08C4701A126D0300A95F43 /* AppDelegate.swift in Sources */,
