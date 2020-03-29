@@ -8,7 +8,7 @@ import Foundation;
 import UIKit;
 
 class PriceFieldDelegate: NSObject, UITextFieldDelegate {
-    // MARK: - Accessories
+    // MARK: - Accessories e.g. helper methods
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text!.isEmpty {textField.text = "$0.00";}
     }

@@ -1,13 +1,8 @@
 //  ViewController.swift
 //  TextFields
 //  Created by Jason on 11/11/14.
+//  Completed / polished by David Chen on 3/27/20
 //  Copyright (c) 2014 Udacity. All rights reserved.
-
-/*
- This lesson demonstrates TextView delegates (protocols/interfaces)
- Here, 3 used: 2 created as custom swift classes, one is just ths UIViewController
- Delegates for TextViews can be easily switched
- */
 
 import UIKit;
 
@@ -44,9 +39,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         self.restrictSwitch.setOn(false, animated:false);
     }
-
     
-    //MARK: - Text Field UIVC Delegate Methods (3rd TextField)
+    /* MARK: - Core & accessory methods for switch-controlled TextView delegate */
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var newText = textField.text! as NSString
         newText = newText.replacingCharacters(in: range, with: string) as NSString;
@@ -56,10 +50,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true;
     }
     
-    //MARK: - 3rdth TextField
     @IBAction func allowText(_ sender: Any) {
         if !(sender as! UISwitch).isOn {
             self.textField3.resignFirstResponder();
         }
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return self.restrictSwitch.isOn;
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder();
+        return true;
     }
 }
