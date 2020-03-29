@@ -48,6 +48,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomTextField" destination="Pck-Q1-Tyx" id="aF5-qJ-0a3"/>
+                        <outlet property="bottomToolbar" destination="Ejz-NE-Atb" id="OAr-JE-xV8"/>
                         <outlet property="imageView" destination="JvD-KB-iq1" id="VJF-xM-4Hh"/>
                         <outlet property="topTextField" destination="p7b-6s-3Jh" id="9S2-bI-9XM"/>
                     </connections>
