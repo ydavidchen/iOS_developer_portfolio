@@ -3,6 +3,13 @@
 //  Starter code: Created by Jason Schatz on 11/6/14.
 //  Copyright (c) 2014 Udacity. All rights reserved.
 
+/*
+ 3 ways for segues:
+ 1) Code only: instantiateViewController
+ 2) Code & Storyboard: setup, then performSeg method
+ 3) Storyboard only: touchup inside
+ */
+
 import UIKit;
 
 class RollViewController: UIViewController {
@@ -22,17 +29,17 @@ class RollViewController: UIViewController {
     * Main functionality of the sample app
     */
     @IBAction func rollTheDice() {
-        // Retrieve DiceViewController, be sure to manually set identifier correctly in the Identity Inspector!
-        let controller: DiceViewController; //custom controller given by Udactiy
-        controller = storyboard?.instantiateViewController(identifier: "DiceViewController") as! DiceViewController;
-        
-        // Set 2 values to random integers:
-        controller.firstValue = randomDiceValue();
-        controller.secondValue = randomDiceValue();
-        
-        present(controller, animated: true, completion: nil);
+        // Invoke the segway
+        performSegue(withIdentifier: "rollDice", sender: self); 
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "rollDice" {
+            let controller = segue.destination as! DiceViewController;
+            controller.firstValue = randomDiceValue();
+            controller.secondValue = randomDiceValue();
+        }
+    }
     
 }
 
