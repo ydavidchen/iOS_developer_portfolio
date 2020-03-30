@@ -21,37 +21,51 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     @IBOutlet weak var imageView: UIImageView!;
     @IBOutlet weak var topTextField: UITextField!;
     @IBOutlet weak var bottomTextField: UITextField!;
-    @IBOutlet weak var bottomToolbar: UIToolbar!; //bottom toolbar
+    @IBOutlet weak var bottomToolbar: UIToolbar!;
+    @IBOutlet weak var cameraButton: UIBarButtonItem!;
+    @IBOutlet weak var shareButton: UIBarButtonItem!; //disable for MemeMe1.0
+    @IBOutlet weak var cancelButton: UIBarButtonItem!;
     
     struct Meme {
         var topText: String
         var bottomText: String
         var originalImg: UIImage
         var memedImage: UIImage
-    }
+    } //save for MemeMe2.0?
     
-    let ERROR_TAG = "Something went wrong!";
-    let MEME_TEXT_ATTR: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.foregroundColor: UIColor.gray,
+    let ERROR_TAG = "Something went wrong!"; //for debugging
+    let MEME_TEXT_ATTR: [NSAttributedString.Key:Any] = [
         NSAttributedString.Key.font: UIFont(name:"HelveticaNeue-CondensedBlack", size:40)!,
-        NSAttributedString.Key.strokeWidth: 0.25
+        NSAttributedString.Key.foregroundColor: UIColor.black,
+        NSAttributedString.Key.strokeColor: UIColor.gray,
+        NSAttributedString.Key.strokeWidth: 0.5
     ];
     
     
-    /* MARK: - ViewController overriden, custom, & helper methods */
+    /* MARK: - ViewController lifecycle custom, & helper methods */
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        topTextField.text = "";
-        bottomTextField.text = "";
-        topTextField.textAlignment = NSTextAlignment.center;
-        bottomTextField.textAlignment = NSTextAlignment.center;
+        topTextField.text = "TOP";
+        bottomTextField.text = "BOTTOM";
+        topTextField.textAlignment = .center;
+        bottomTextField.textAlignment = .center;
         topTextField.defaultTextAttributes = MEME_TEXT_ATTR;
         bottomTextField.defaultTextAttributes = MEME_TEXT_ATTR;
     
         topTextField.delegate = self;
         bottomTextField.delegate = self;
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera);
+        subscribeToKeyboardNotif();
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        unsubscribeToKeyboardNotif();
     }
     
     func coSetNavAndToolbar(hide: Bool) { //helper
@@ -67,6 +81,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         present(imagePicker, animated:true, completion:nil);
     }
     
+    @IBAction func pickCameraImg(_ sender: Any) {
+        let cameraImgPicker = UIImagePickerController();
+        cameraImgPicker.delegate = self;
+        cameraImgPicker.sourceType = .camera;
+        present(cameraImgPicker, animated:true, completion:nil);
+    }
+    
     func assembleMeme() -> UIImage {
         coSetNavAndToolbar(hide: true);
 
@@ -78,25 +99,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         coSetNavAndToolbar(hide: false);
         return memedImage;
      }
-    
-//    func saveMeme() {
-//        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage);
-//    }
-     
 
+    @IBAction func shareMeme(_ sender: Any) {
+        self.bottomTextField.text = "";
+        self.topTextField.text = "";
+        self.imageView.image = assembleMeme();
+        self.imageView.contentMode = .scaleAspectFill;
+    }
+    
     /* MARK: - Methods to customize keyboards */
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated);
-        subscribeToKeyboardNotif();
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated);
-        unsubscribeToKeyboardNotif();
-    }
-    
     @objc func keyboardWillShow(_ notification: Notification) {
-        if topTextField.isFirstResponder || bottomTextField.isFirstResponder {
+        if bottomTextField.isFirstResponder {
+            // Shift keyboard ONLY when the bottom textfield is being used
             view.frame.origin.y = -getKeyboardHeight(notification);
         }
     }
@@ -137,10 +151,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     /* MARK: - Delegate methods for TextFields */
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.becomeFirstResponder();
+        if textField.isFirstResponder && (textField.text == "TOP" || textField.text == "BOTTOM") {
+            textField.text = "";
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder();
+        if textField.text == "" {
+            if textField.restorationIdentifier == "topTextField" {
+                textField.text = "TOP";
+            } else if textField.restorationIdentifier == "bottomTextField" {
+                textField.text = "Bottom";
+            }
+        }
         return true;
     }
 }
