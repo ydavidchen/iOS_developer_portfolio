@@ -5,14 +5,6 @@
 //  Created by DavidKevinChen on 3/29/20.
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
 
-
-/** Note about simulator (iPhone 11 Pro Max) -- PLEASE READ WHEN GRADING!!!
-In my simulator, the keyboard is by default linked to my Laptop keyboard.
-Simply uncheck the simulator-laptop keyboard linking the Simulator once won't fix the issue.
-However, if I repeat this action for another time, the simulator's keyboard will turn on.
-This would ONLY happen when I try to test the app for the first time on Xcode startup.
-*/
-
 import UIKit;
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate {
@@ -48,8 +40,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         
         topTextField.text = "TOP";
         bottomTextField.text = "BOTTOM";
-        topTextField.textAlignment = .center;
-        bottomTextField.textAlignment = .center;
+        topTextField.textAlignment = NSTextAlignment.center;
+        bottomTextField.textAlignment = NSTextAlignment.center;
         topTextField.defaultTextAttributes = MEME_TEXT_ATTR;
         bottomTextField.defaultTextAttributes = MEME_TEXT_ATTR;
     
