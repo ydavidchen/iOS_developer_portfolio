@@ -17,19 +17,14 @@ While much of the repository were based on instructions and guides from the Udac
 This repository hosts 4 project assignments created by Udacity [iOS Developer Nanodegree](https://www.udacity.com/course/ios-developer-nanodegree--nd003) and were implemented by me in partial fulfillment of the Nanodegree certificate. The repo is publicly available for evaluation purposes. Each project is located within the immediate sub-directory of the main repository folder.
 
 1. _Pitch Perfect_
-2. _MemeMe_ (2 milestones)
+2. _MemeMe_
+  - Version 1.0
+  - Version 2.0
 
 The final project is not included in this repository, but as a stand-alone repo (LINK TBD).
 
 ### Sample Apps
 
-Sample apps are exercises, tutorials, or components leading up to a one of the projects above. They are not required components of the Nanodegree certificate. Please note that the template / starter code of many sample apps are provided by Udacity as a teaching tool or self-guided programming drills. All sample apps are located in the sub-directory `sample_apps/`, in their respective sub-sub-directories.
-
-* _Pitch Perfect_ module
-* _MemeMe 1.0_ submodule
-  - _ColorMaker_ (switches, sliders)
-  - TextFields (textviews, delegates)
-* _MemeMe 2.0_ submodule
-
+Sample apps are exercises, tutorials, or components leading up to a one of the projects above. They are not required to fulfill the NanoDegree. Please note that the template / starter code of many sample apps are provided by Udacity as a teaching tool or self-guided programming drills. All sample apps are located in the sub-directory `sample_apps/`.
 
 Finally, please note that code, materials, and ideas in this repository maybe subject to copyright and the Udacity Honor Code (if applicable), so please behave _responsibly_.
