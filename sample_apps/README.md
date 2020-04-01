@@ -21,10 +21,16 @@ These apps were either used by Udacity as teaching tools or assigned as "Challen
 
 ### _MemeMe 2.0_ submodule
 
-* _FavoriteThings_: simple TableViews demo
-* _DoReMi_: TableViewDelegates demo
-* _BondVillains_: TableViews, DataSource & Delegates demo
-* _RockPaperScissorsWithHistory_: TableViews challenge app
-* _MakeYourOwnAdventures_: Navigations
+* _FavoriteThings_: simple TableViews
+* _DoReMi_: TableViewDelegates
+* _BondVillains_
+  - TableView (DataSource & Delegates)
+  - Navigation VC
+* _RockPaperScissors_
+  - _...WithHistory_: TableViews challenge app
+  - _...2_: Navigation VC exercise
+* _MakeYourOwnAdventures_
+  - TableView
+  - Navigation VC & table view: challenge app
 
 The copyright is reserved to Udacity.
