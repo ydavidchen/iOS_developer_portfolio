@@ -1,12 +1,10 @@
 //  AppDelegate.swift
-//  MakeYourOwnAdventure
-//  Created by Jason Schatz on 12/11/14.
+//  FavoriteThings
+//
+//  Created by Jason Schatz on 11/18/14.
 //  Copyright (c) 2014 Udacity. All rights reserved.
 
-import UIKit
-
-// MARK: - AppDelegate: UIResponder, UIApplicationDelegate
-
+import UIKit;
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

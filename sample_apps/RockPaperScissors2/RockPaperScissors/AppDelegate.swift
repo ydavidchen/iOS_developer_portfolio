@@ -1,7 +1,10 @@
+//
 //  AppDelegate.swift
-//  MakeYourOwnAdventure
-//  Created by Jason Schatz on 12/11/14.
-//  Copyright (c) 2014 Udacity. All rights reserved.
+//  RockPaperScissors
+//
+//  Created by Gabrielle Miller-Messner on 10/29/14.
+//  Copyright (c) 2014 Gabrielle Miller-Messner. All rights reserved.
+//
 
 import UIKit
 

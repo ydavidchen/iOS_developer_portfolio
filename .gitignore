@@ -2,6 +2,7 @@
 
 data/
 results/
+submissions/
 ios_playground/
 .IDEA/
 .ipynb_checkpoints

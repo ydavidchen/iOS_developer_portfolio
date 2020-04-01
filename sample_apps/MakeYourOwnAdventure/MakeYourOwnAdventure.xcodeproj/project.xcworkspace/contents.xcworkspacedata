@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TheTiger.xcodeproj">
+      location = "self:/Users/DavidKevinChen/repos/Udacity_iOS_developer/sample_apps/MakeYourOwnAdventure/MakeYourOwnAdventure.xcodeproj">
    </FileRef>
 </Workspace>

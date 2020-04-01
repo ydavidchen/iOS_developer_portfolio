@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="9bY-bT-vqa">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,12 +20,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n9n-69-YS3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-725" y="336"/>
+            <point key="canvasLocation" x="-775" y="335"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="TheTiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="MYOAViewController" customModule="MakeYourOwnAdventure" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jDT-rU-cvV"/>
                         <viewControllerLayoutGuide type="bottom" id="mzg-Mv-LTk"/>
@@ -82,7 +81,7 @@
         <!--View Controller-->
         <scene sceneID="VbU-kJ-HR9">
             <objects>
-                <viewController id="we0-gY-0H6" customClass="ViewController" customModule="TheTiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="we0-gY-0H6" customClass="MYOAViewController" customModule="MakeYourOwnAdventure" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M5L-zx-VdN"/>
                         <viewControllerLayoutGuide type="bottom" id="jCZ-dQ-ngF"/>
@@ -138,7 +137,7 @@
         <!--View Controller-->
         <scene sceneID="tRi-l2-2a1">
             <objects>
-                <viewController id="KjF-Ta-XCk" customClass="ViewController" customModule="TheTiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KjF-Ta-XCk" customClass="MYOAViewController" customModule="MakeYourOwnAdventure" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9g8-Xr-lEG"/>
                         <viewControllerLayoutGuide type="bottom" id="WGM-uV-mPH"/>
@@ -195,7 +194,7 @@
         <!--View Controller-->
         <scene sceneID="RBL-u1-1bg">
             <objects>
-                <viewController id="4G3-RT-LZe" customClass="ViewController" customModule="TheTiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4G3-RT-LZe" customClass="MYOAViewController" customModule="MakeYourOwnAdventure" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CSb-MY-xsJ"/>
                         <viewControllerLayoutGuide type="bottom" id="LJB-Ag-rNn"/>
@@ -228,12 +227,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="01t-PF-VN6" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2193" y="153"/>
+            <point key="canvasLocation" x="2274" y="149"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hAS-Ii-1UL">
             <objects>
-                <viewController id="2od-3A-aBE" customClass="ViewController" customModule="TheTiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2od-3A-aBE" customClass="MYOAViewController" customModule="MakeYourOwnAdventure" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rnb-b1-6v3"/>
                         <viewControllerLayoutGuide type="bottom" id="3DZ-y7-3Zp"/>
@@ -266,12 +265,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tDg-pL-bcw" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1525" y="-175"/>
+            <point key="canvasLocation" x="1506" y="-155"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="sRp-x5-vnh">
             <objects>
-                <viewController id="kVE-OB-S7M" customClass="ViewController" customModule="TheTiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kVE-OB-S7M" customClass="MYOAViewController" customModule="MakeYourOwnAdventure" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SDw-Hq-eGA"/>
                         <viewControllerLayoutGuide type="bottom" id="m4F-22-5q2"/>
@@ -322,12 +321,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lSu-Km-swT" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1525" y="1183"/>
+            <point key="canvasLocation" x="1507" y="1122"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Cld-ap-JE3">
             <objects>
-                <viewController id="2qu-x2-B4H" customClass="ViewController" customModule="TheTiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2qu-x2-B4H" customClass="MYOAViewController" customModule="MakeYourOwnAdventure" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GGr-F0-edf"/>
                         <viewControllerLayoutGuide type="bottom" id="Ido-TE-pPj"/>
@@ -361,12 +360,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mCN-Dr-YTX" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1525" y="528"/>
+            <point key="canvasLocation" x="1506" y="488"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="3Sl-G1-rdL">
             <objects>
-                <viewController id="3eM-N6-iQq" customClass="ViewController" customModule="TheTiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3eM-N6-iQq" customClass="MYOAViewController" customModule="MakeYourOwnAdventure" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yle-P0-BQA"/>
                         <viewControllerLayoutGuide type="bottom" id="Tvm-ZQ-TG8"/>
@@ -399,12 +398,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOT-EN-ZJ7" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2525" y="1334"/>
+            <point key="canvasLocation" x="2274" y="1442"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="jrg-Or-cZX">
             <objects>
-                <viewController id="JUW-ls-BhX" customClass="ViewController" customModule="TheTiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JUW-ls-BhX" customClass="MYOAViewController" customModule="MakeYourOwnAdventure" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8iM-EY-0dS"/>
                         <viewControllerLayoutGuide type="bottom" id="gI4-Kn-6e1"/>
@@ -438,7 +437,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PLO-qC-7yw" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2193" y="888"/>
+            <point key="canvasLocation" x="2274" y="789"/>
         </scene>
     </scenes>
 </document>
