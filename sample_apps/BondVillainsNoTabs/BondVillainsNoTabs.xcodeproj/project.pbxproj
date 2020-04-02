@@ -13,8 +13,9 @@
 		4D04CC091A1D1E5700FAB0D8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D04CC081A1D1E5700FAB0D8 /* Images.xcassets */; };
 		4D04CC0C1A1D1E5700FAB0D8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D04CC0A1A1D1E5700FAB0D8 /* LaunchScreen.xib */; };
 		4D04CC221A1D261800FAB0D8 /* Villain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D04CC211A1D261800FAB0D8 /* Villain.swift */; };
-		A66EC62A2435B08200CA30D7 /* ViewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66EC6292435B08200CA30D7 /* ViewCollectionViewController.swift */; };
-		A6BC159C243476DD00E4328E /* VillainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC159B243476DD00E4328E /* VillainDetailViewController.swift */; };
+		4D1828D81A3BCDD5005D80E9 /* VillainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1828D71A3BCDD5005D80E9 /* VillainDetailViewController.swift */; };
+		A6255B8A24359EE800387B96 /* VillainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6255B8924359EE800387B96 /* VillainCollectionViewController.swift */; };
+		A6255B8C2435A9FC00387B96 /* VillainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6255B8B2435A9FC00387B96 /* VillainCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +27,9 @@
 		4D04CC081A1D1E5700FAB0D8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4D04CC0B1A1D1E5700FAB0D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4D04CC211A1D261800FAB0D8 /* Villain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Villain.swift; sourceTree = "<group>"; };
-		A66EC6292435B08200CA30D7 /* ViewCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCollectionViewController.swift; sourceTree = "<group>"; };
-		A6BC159B243476DD00E4328E /* VillainDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillainDetailViewController.swift; sourceTree = "<group>"; };
+		4D1828D71A3BCDD5005D80E9 /* VillainDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VillainDetailViewController.swift; sourceTree = "<group>"; };
+		A6255B8924359EE800387B96 /* VillainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillainCollectionViewController.swift; sourceTree = "<group>"; };
+		A6255B8B2435A9FC00387B96 /* VillainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillainCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,10 +63,11 @@
 			isa = PBXGroup;
 			children = (
 				4D04CC011A1D1E5700FAB0D8 /* AppDelegate.swift */,
-				4D04CC211A1D261800FAB0D8 /* Villain.swift */,
 				4D04CC031A1D1E5700FAB0D8 /* ViewController.swift */,
-				A6BC159B243476DD00E4328E /* VillainDetailViewController.swift */,
-				A66EC6292435B08200CA30D7 /* ViewCollectionViewController.swift */,
+				A6255B8B2435A9FC00387B96 /* VillainCollectionViewCell.swift */,
+				4D1828D71A3BCDD5005D80E9 /* VillainDetailViewController.swift */,
+				A6255B8924359EE800387B96 /* VillainCollectionViewController.swift */,
+				4D04CC211A1D261800FAB0D8 /* Villain.swift */,
 				4D04CC051A1D1E5700FAB0D8 /* Main.storyboard */,
 				4D04CC0A1A1D1E5700FAB0D8 /* LaunchScreen.xib */,
 				4D04CC081A1D1E5700FAB0D8 /* Images.xcassets */,
@@ -107,7 +110,7 @@
 		4D04CBF41A1D1E5700FAB0D8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Udacity;
 				TargetAttributes = {
@@ -154,10 +157,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D04CC041A1D1E5700FAB0D8 /* ViewController.swift in Sources */,
-				A66EC62A2435B08200CA30D7 /* ViewCollectionViewController.swift in Sources */,
 				4D04CC021A1D1E5700FAB0D8 /* AppDelegate.swift in Sources */,
+				A6255B8C2435A9FC00387B96 /* VillainCollectionViewCell.swift in Sources */,
 				4D04CC221A1D261800FAB0D8 /* Villain.swift in Sources */,
-				A6BC159C243476DD00E4328E /* VillainDetailViewController.swift in Sources */,
+				4D1828D81A3BCDD5005D80E9 /* VillainDetailViewController.swift in Sources */,
+				A6255B8A24359EE800387B96 /* VillainCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +234,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -278,7 +282,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -290,6 +294,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BondVillains/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UD.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,6 +307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BondVillains/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UD.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -18,7 +18,9 @@ struct Villain {
     static let NameKey = "NameKey";
     static let EvilSchemeKey = "EvilScheme";
     static let ImageNameKey = "ImageNameKey";
-
+    static let SBOARD_ID = "VillainDetailViewController";
+    static let PROTYPE_CELL_ID = "VillainCell";
+    
     init(dictionary: [String:String]) {
         self.name = dictionary[Villain.NameKey]!;
         self.evilScheme = dictionary[Villain.EvilSchemeKey]!;
@@ -55,5 +57,12 @@ extension Villain {
             [Villain.NameKey : "Auric Goldfinger", Villain.EvilSchemeKey : "Nuke Fort Knox.", Villain.ImageNameKey : "Goldfinger"],
             [Villain.NameKey : "Max Zorin", Villain.EvilSchemeKey : "Destroy Silicon Valley with an earthquake and flood.", Villain.ImageNameKey : "Zorin"]
         ];
+    }
+    
+    static func getVillain(_ allVillains:[Villain], _ indexPath: IndexPath) -> Villain {
+        // Helper function to reduce code duplication:
+        // let allVillains = Villain.allVillains;
+        let rowIndex = (indexPath as NSIndexPath).row;
+        return allVillains[rowIndex];
     }
 }
