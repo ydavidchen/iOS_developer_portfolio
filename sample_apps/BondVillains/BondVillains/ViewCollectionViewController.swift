@@ -3,15 +3,30 @@
 //  Created by DavidKevinChen on 4/2/20.
 //  Copyright © 2020 Udacity. All rights reserved.
 
+
 import UIKit;
 
 class ViewCollectionViewController: UICollectionViewController {
     let allVillains = Villain.allVillains;
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!; //again, unwrapping needed
     
     //MARK: - Customize lifecycle methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
+        
+        //TODO Handle Tab Bar
         self.tabBarController?.tabBar.isHidden = false; //turn tab bar ON by default
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad();
+        
+        //TODO Handle flowLayout to cover a variety of screen sizes & orientations
+        let fSpace: CGFloat = 3.0;
+        let fDimension = (view.frame.size.width - 2*fSpace) / 3.0;
+        flowLayout.minimumInteritemSpacing = fSpace;
+        flowLayout.minimumLineSpacing = fSpace;
+        flowLayout.itemSize = CGSize(width:fDimension, height:fDimension);
     }
 
     //MARK: - CollectionView contract methods

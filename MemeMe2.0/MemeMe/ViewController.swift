@@ -1,15 +1,14 @@
 //  ViewController.swift
 //  MemeMe
-//  Version: 1.0
-//  References: Lesson 5: UIKit Fundamentals
 //  Created by DavidKevinChen on 3/29/20.
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
 
 import UIKit;
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate {
-    
     /* MARK: - UI Widgets & Properties */
+    var meme = [Meme]();
+    
     @IBOutlet weak var imageView: UIImageView!;
     @IBOutlet weak var topTextField: UITextField!;
     @IBOutlet weak var bottomTextField: UITextField!;
@@ -18,12 +17,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     @IBOutlet weak var shareButton: UIBarButtonItem!; //disable for MemeMe1.0
     @IBOutlet weak var cancelButton: UIBarButtonItem!;
     
-    struct Meme {
-        var topText: String
-        var bottomText: String
-        var originalImg: UIImage
-        var memedImage: UIImage
-    } //save for MemeMe2.0?
+//    struct Meme {
+//        var topText: String
+//        var bottomText: String
+//        var originalImg: UIImage
+//        var memedImage: UIImage
+//    }
     
     let ERROR_TAG = "Something went wrong!"; //for debugging
     let MEME_TEXT_ATTR: [NSAttributedString.Key:Any] = [
@@ -32,7 +31,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         NSAttributedString.Key.strokeColor: UIColor.gray,
         NSAttributedString.Key.strokeWidth: 0.5
     ];
-    
     
     /* MARK: - ViewController lifecycle custom, & helper methods */
     override func viewDidLoad() {
@@ -92,6 +90,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         return memedImage;
      }
 
+    func save() {
+        // Create the meme
+        let meme = Meme(top: topField.text!, bottom: bottomField.text!, image: imageView.image, memedImage: memedImage);
+
+        // Add it to the memes array in the Application Delegate
+        let object = UIApplication.shared.delegate;
+        let appDelegate = object as! AppDelegate;
+        appDelegate.memes.append(meme);
+    }
+    
+    
     @IBAction func shareMeme(_ sender: Any) {
         self.bottomTextField.text = "";
         self.topTextField.text = "";
@@ -159,4 +168,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         }
         return true;
     }
+    
+    let appDelegates = UIApplication.shared.delegate as! AppDelegate;
+    memes = AppDelegate.memes;
 }

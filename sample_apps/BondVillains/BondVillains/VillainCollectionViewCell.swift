@@ -7,7 +7,7 @@ import UIKit;
 
 class VillainCollectionViewCell: UICollectionViewCell {
     //MARK: - Properties & Outlets
-    var villain: Villain!; //not needed but won't hurt
+    // var villain: Villain!; //not needed but won't hurt
     @IBOutlet weak var imageView: UIImageView!;
     @IBOutlet weak var label: UILabel!;
     

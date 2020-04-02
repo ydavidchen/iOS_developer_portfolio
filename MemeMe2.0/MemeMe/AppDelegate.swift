@@ -1,6 +1,5 @@
 //  AppDelegate.swift
 //  MemeMe
-//  Version: 1.0
 //  Created by DavidKevinChen on 3/29/20.
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
 
