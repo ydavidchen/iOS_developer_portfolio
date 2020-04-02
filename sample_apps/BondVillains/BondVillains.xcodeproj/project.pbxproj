@@ -14,6 +14,7 @@
 		4D04CC0C1A1D1E5700FAB0D8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D04CC0A1A1D1E5700FAB0D8 /* LaunchScreen.xib */; };
 		4D04CC221A1D261800FAB0D8 /* Villain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D04CC211A1D261800FAB0D8 /* Villain.swift */; };
 		A66EC62A2435B08200CA30D7 /* ViewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66EC6292435B08200CA30D7 /* ViewCollectionViewController.swift */; };
+		A66EC62C2435B45E00CA30D7 /* VillainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66EC62B2435B45E00CA30D7 /* VillainCollectionViewCell.swift */; };
 		A6BC159C243476DD00E4328E /* VillainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC159B243476DD00E4328E /* VillainDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		4D04CC0B1A1D1E5700FAB0D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4D04CC211A1D261800FAB0D8 /* Villain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Villain.swift; sourceTree = "<group>"; };
 		A66EC6292435B08200CA30D7 /* ViewCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCollectionViewController.swift; sourceTree = "<group>"; };
+		A66EC62B2435B45E00CA30D7 /* VillainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillainCollectionViewCell.swift; sourceTree = "<group>"; };
 		A6BC159B243476DD00E4328E /* VillainDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillainDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,10 +63,11 @@
 			isa = PBXGroup;
 			children = (
 				4D04CC011A1D1E5700FAB0D8 /* AppDelegate.swift */,
-				4D04CC211A1D261800FAB0D8 /* Villain.swift */,
 				4D04CC031A1D1E5700FAB0D8 /* ViewController.swift */,
-				A6BC159B243476DD00E4328E /* VillainDetailViewController.swift */,
 				A66EC6292435B08200CA30D7 /* ViewCollectionViewController.swift */,
+				A6BC159B243476DD00E4328E /* VillainDetailViewController.swift */,
+				A66EC62B2435B45E00CA30D7 /* VillainCollectionViewCell.swift */,
+				A66EC62D2435B64500CA30D7 /* Model */,
 				4D04CC051A1D1E5700FAB0D8 /* Main.storyboard */,
 				4D04CC0A1A1D1E5700FAB0D8 /* LaunchScreen.xib */,
 				4D04CC081A1D1E5700FAB0D8 /* Images.xcassets */,
@@ -79,6 +82,14 @@
 				4D04CC001A1D1E5700FAB0D8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A66EC62D2435B64500CA30D7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4D04CC211A1D261800FAB0D8 /* Villain.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +166,7 @@
 			files = (
 				4D04CC041A1D1E5700FAB0D8 /* ViewController.swift in Sources */,
 				A66EC62A2435B08200CA30D7 /* ViewCollectionViewController.swift in Sources */,
+				A66EC62C2435B45E00CA30D7 /* VillainCollectionViewCell.swift in Sources */,
 				4D04CC021A1D1E5700FAB0D8 /* AppDelegate.swift in Sources */,
 				4D04CC221A1D261800FAB0D8 /* Villain.swift in Sources */,
 				A6BC159C243476DD00E4328E /* VillainDetailViewController.swift in Sources */,

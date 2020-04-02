@@ -2,7 +2,7 @@
 //  BondVillains
 //  Created by Jason on 11/19/14.
 //  Copyright (c) 2014 Udacity. All rights reserved.
-//  This is a CUSTOM CLASS provided by Udacity
+//  This is a CUSTOM OBJECT CLASS provided by Udacity, modified by ydavidchen
 
 import Foundation;
 import UIKit;
@@ -19,7 +19,7 @@ struct Villain {
     static let EvilSchemeKey = "EvilScheme";
     static let ImageNameKey = "ImageNameKey";
     static let SBOARD_ID = "VillainDetailViewController";
-    static let PROTYPE_CELL_ID = "VillainCell";
+    static let PROTYPE_CELL_ID = "VillainCell"; //shared in both TableViewCell & CollectionViewCell
     
     init(dictionary: [String:String]) {
         self.name = dictionary[Villain.NameKey]!;
@@ -60,8 +60,7 @@ extension Villain {
     }
     
     static func getVillain(_ allVillains:[Villain], _ indexPath: IndexPath) -> Villain {
-        // Helper function to reduce code duplication:
-        // let allVillains = Villain.allVillains;
+        // Reusable helper function to reduce code duplication
         let rowIndex = (indexPath as NSIndexPath).row;
         return allVillains[rowIndex];
     }

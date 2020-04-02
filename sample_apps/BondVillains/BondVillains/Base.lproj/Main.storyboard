@@ -112,7 +112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akb-TT-1H5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2110" y="342"/>
+            <point key="canvasLocation" x="2207" y="342"/>
         </scene>
         <!--Collection-->
         <scene sceneID="vmy-sm-E43">
@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="726" y="-333"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--View Collection View Controller-->
         <scene sceneID="nr7-8x-by8">
             <objects>
-                <collectionViewController id="gKs-zE-qmQ" sceneMemberID="viewController">
+                <collectionViewController id="gKs-zE-qmQ" customClass="ViewCollectionViewController" customModule="BondVillains" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="o3U-93-BHz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,7 +146,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="scf-wp-H3S">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VillainCell" id="scf-wp-H3S" customClass="VillainCollectionViewCell" customModule="BondVillains" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9F5-Eb-Xxg">
@@ -176,6 +176,10 @@
                                         <constraint firstItem="XRj-bw-ydr" firstAttribute="centerX" secondItem="9F5-Eb-Xxg" secondAttribute="centerX" id="lzi-0D-pCO"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="imageView" destination="XRj-bw-ydr" id="azg-MO-xO1"/>
+                                    <outlet property="label" destination="BCM-eB-idS" id="Ybt-cA-99M"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
