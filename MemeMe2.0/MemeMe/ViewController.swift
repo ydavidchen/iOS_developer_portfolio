@@ -1,13 +1,13 @@
 //  ViewController.swift
 //  MemeMe version 2.0
-//  Created by DavidKevinChen on 3/29/20.
+//  Created by DavidKevinChen on 4/4/20
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
 
 import UIKit;
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate {
     //MARK: - Properites & UI elements
-    var meme = [Meme]();
+    var meme: Meme!; //unwrapped optional REQUIERD to avoid compile-time error
     
     @IBOutlet weak var imageView: UIImageView!;
     @IBOutlet weak var topTextField: UITextField!;

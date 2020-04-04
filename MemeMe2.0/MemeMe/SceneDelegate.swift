@@ -1,6 +1,6 @@
 //  SceneDelegate.swift
 //  MemeMe version 2.0
-//  Created by DavidKevinChen on 3/29/20.
+//  Created by DavidKevinChen on 4/4/20
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
 
 import UIKit;
