@@ -7,20 +7,25 @@
 import Foundation;
 import UIKit;
 
-class Meme {
+struct Meme {
     //MARK: - Properties
     var topField: String;
     var bottomField: String;
-    var image: UIImage;
-    var memedImage: UIImage;
+    var imageName: String;
 
+    //MARK: - Static objects
+    static let SBOARD_ID = "ViewController"; //reusable
+    static let PROTYPE_CELL_ID = "TableViewCell"; //reusable; shared in TableViewCell & CollectionViewCell
+    static let topFieldKey = "Top";
+    static let bottomFieldKey = "Bottom";
+    static let imageKey = "ImageKey";
+    static let ERROR_TAG = "Something went wrong!"; //for debugging
+    
     //MARK: - Constructor
-    init(top:String, bottom:String, image:UIImage) {
-        self.topField = top;
-        self.bottomField = bottom;
-        self.image = image;
-        
-        // Computed property
-        self.memedImage = image; //initial value
+    init(dictionary: [String:String]) {
+        // Set properties:
+        self.topField = dictionary[Meme.topFieldKey]!;
+        self.bottomField = dictionary[Meme.bottomFieldKey]!;
+        self.imageName = dictionary[Meme.imageKey]!;
     }
 }

@@ -1,12 +1,12 @@
 //  ViewController.swift
-//  MemeMe
+//  MemeMe version 2.0
 //  Created by DavidKevinChen on 3/29/20.
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
 
 import UIKit;
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate {
-    /* MARK: - UI Widgets & Properties */
+    //MARK: - Properites & UI elements
     var meme = [Meme]();
     
     @IBOutlet weak var imageView: UIImageView!;
@@ -17,14 +17,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     @IBOutlet weak var shareButton: UIBarButtonItem!; //disable for MemeMe1.0
     @IBOutlet weak var cancelButton: UIBarButtonItem!;
     
-//    struct Meme {
-//        var topText: String
-//        var bottomText: String
-//        var originalImg: UIImage
-//        var memedImage: UIImage
-//    }
-    
-    let ERROR_TAG = "Something went wrong!"; //for debugging
     let MEME_TEXT_ATTR: [NSAttributedString.Key:Any] = [
         NSAttributedString.Key.font: UIFont(name:"HelveticaNeue-CondensedBlack", size:40)!,
         NSAttributedString.Key.foregroundColor: UIColor.black,
@@ -32,7 +24,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         NSAttributedString.Key.strokeWidth: 0.5
     ];
     
-    /* MARK: - ViewController lifecycle custom, & helper methods */
+    //MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad();
         
@@ -49,16 +41,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
+        
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera);
         subscribeToKeyboardNotif();
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated);
+        
         unsubscribeToKeyboardNotif();
     }
     
-    func coSetNavAndToolbar(hide: Bool) { //helper
+    func coSetNavAndToolbar(hide: Bool) {
+        //Helper method to reduce code duplication
         navigationController?.setNavigationBarHidden(hide, animated: false);
         self.bottomToolbar.isHidden = hide;
     }
@@ -89,16 +84,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         coSetNavAndToolbar(hide: false);
         return memedImage;
      }
-
-    func save() {
-        // Create the meme
-        let meme = Meme(top: topField.text!, bottom: bottomField.text!, image: imageView.image, memedImage: memedImage);
-
-        // Add it to the memes array in the Application Delegate
-        let object = UIApplication.shared.delegate;
-        let appDelegate = object as! AppDelegate;
-        appDelegate.memes.append(meme);
-    }
     
     
     @IBAction func shareMeme(_ sender: Any) {
@@ -108,7 +93,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         self.imageView.contentMode = .scaleAspectFill;
     }
     
-    /* MARK: - Methods to customize keyboards */
+    //MARK: - Methods to customize keyboards
     @objc func keyboardWillShow(_ notification: Notification) {
         if bottomTextField.isFirstResponder {
             // Shift keyboard ONLY when the bottom textfield is being used
@@ -139,17 +124,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     }
     
     
-    /* MARK: - Delegate methods for ImagePicker */
+    //MARK: - ImagePicker delegate method implementations
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = image;
         } else {
-            print("imagePickerController() " + ERROR_TAG);
+            print("imagePickerController() " + Meme.ERROR_TAG);
         }
         dismiss(animated: true, completion: nil);
     }
     
-    /* MARK: - Delegate methods for TextFields */
+    //MARK: - TextFieldDelegate method implementations
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.becomeFirstResponder();
         if textField.isFirstResponder && (textField.text == "TOP" || textField.text == "BOTTOM") {
@@ -169,6 +154,4 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         return true;
     }
     
-    let appDelegates = UIApplication.shared.delegate as! AppDelegate;
-    memes = AppDelegate.memes;
 }

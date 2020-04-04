@@ -1,9 +1,9 @@
 //  AppDelegate.swift
-//  MemeMe
+//  MemeMe version 2.0
 //  Created by DavidKevinChen on 3/29/20.
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
 
-import UIKit
+import UIKit;
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
