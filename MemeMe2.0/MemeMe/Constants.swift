@@ -13,6 +13,7 @@ struct Constants {
     static let ID_COLLECTIONVIEW = "CollectionViewController"; //reusable
     static let ID_TABLEVIEW = "TableViewController";
     static let ID_SENT_MEME = "SentMemeViewController"; //reusable; shared in TableViewCell & CollectionViewCell
+    static let ID_TABBAR = "TabBarController";
     
     //MARK: - Reusable static methods to reduce code duplication & increase consistency
     static func getMemesFromAppDele() -> [Meme] {

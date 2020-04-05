@@ -10,7 +10,7 @@ struct Meme {
     //MARK: - Properties
     var topField: String;
     var bottomField: String;
-    var image: UIImage;
+
     var memedImage: UIImage;
 
     //MARK: - Static properties for reference
@@ -25,10 +25,9 @@ struct Meme {
     ];
     
     //MARK: - Constructor
-    init(_ top:String, _ bottom:String, _ image:UIImage, _ memedImage:UIImage?=nil) {
+    init(_ top:String, _ bottom:String, _ memedImage:UIImage) {
         self.topField = top;
         self.bottomField = bottom;
-        self.image = image;
-        self.memedImage = memedImage!;
+        self.memedImage = memedImage;
     }
 }

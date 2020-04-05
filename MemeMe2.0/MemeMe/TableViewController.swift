@@ -10,7 +10,12 @@ Class methods should be consistent with CollectionViewController
 */
 class TableViewController: UITableViewController {
     //MARK: - Properites & UI elements
-    var memes = Constants.getMemesFromAppDele();
+    // var memes = Constants.getMemesFromAppDele();
+    var memes: [Meme]! {
+        let object = UIApplication.shared.delegate;
+        let appDelegate = object as! AppDelegate;
+        return appDelegate.memes;
+    }
     
     //MARK: - Lifecycle methods
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +35,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let meme = Constants.getMeme(memes, indexPath);
-        let cell = tableView.dequeueReusableCell(withIdentifier:Constants.ID_TABLEVIEW) as! TableViewCell;
+        let cell = tableView.dequeueReusableCell(withIdentifier:"TableViewCell") as! TableViewCell;
         cell.memeImageView.image = meme.memedImage;
         cell.memeLabel.text = "\(meme.topField)...\(meme.bottomField)";
         return cell;

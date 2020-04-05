@@ -10,7 +10,13 @@ Class methods should be consistent with TableViewController
 */
 class CollectionViewController: UICollectionViewController {
     //MARK: - Properites & UI elements
-    var memes = Constants.getMemesFromAppDele();
+    // var memes = Constants.getMemesFromAppDele();
+    var memes: [Meme]! {
+        let object = UIApplication.shared.delegate;
+        let appDelegate = object as! AppDelegate;
+        return appDelegate.memes;
+    }
+    
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!;
     let FL_SPACE: CGFloat = 3.0; //flowlayout
 
@@ -43,7 +49,7 @@ class CollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let meme = Constants.getMeme(memes, indexPath);
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:Constants.ID_COLLECTIONVIEW, for:indexPath) as! CollectionViewCell;
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"CollectionViewCell", for:indexPath) as! CollectionViewCell;
         cell.imageView.image = meme.memedImage;
         return cell;
     }

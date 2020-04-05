@@ -7,14 +7,14 @@ import UIKit;
 
 class SentMemeViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate {
     //MARK: - Properites & UI elements
-    var meme: Meme!; //unwrapped optional REQUIERD to avoid compile-time error
+    var meme: Meme!;
     
     @IBOutlet weak var imageView: UIImageView!;
     @IBOutlet weak var topTextField: UITextField!;
     @IBOutlet weak var bottomTextField: UITextField!;
     @IBOutlet weak var bottomToolbar: UIToolbar!;
     @IBOutlet weak var cameraButton: UIBarButtonItem!;
-    @IBOutlet weak var shareButton: UIBarButtonItem!; //disable for MemeMe1.0
+    @IBOutlet weak var shareButton: UIBarButtonItem!;
     @IBOutlet weak var cancelButton: UIBarButtonItem!;
     
     //MARK: - Lifecycle methods
@@ -24,8 +24,6 @@ class SentMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // Default UI appearance:
         topTextField.text = "TOP";
         bottomTextField.text = "BOTTOM";
-        topTextField.textAlignment = NSTextAlignment.center;
-        bottomTextField.textAlignment = NSTextAlignment.center;
         topTextField.defaultTextAttributes = Meme.MEME_TEXT_ATTR;
         bottomTextField.defaultTextAttributes = Meme.MEME_TEXT_ATTR;
         
@@ -36,8 +34,12 @@ class SentMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera);
         subscribeToKeyboardNotif();
+        
+        // Default UI element appearances:
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera); //display IF available
+        self.tabBarController?.tabBar.isHidden = true; //all times
+        self.shareButton?.isEnabled = false; //will change later
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,68 +47,74 @@ class SentMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         unsubscribeToKeyboardNotif();
     }
     
-    //MARK: - Helper functions for program abstraction:
+    //MARK: - Helper functions for abstraction:
     func saveMeme(_ meme2Save:Meme) {
         //Helper to pass current meme data to AppDelegate for sharing across other VCs
-        let object = UIApplication.shared.delegate;
-        let appDelegate = object as! AppDelegate;
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate;
         appDelegate.memes.append(meme2Save);
         
-        // Save to gallery:
-        UIImageWriteToSavedPhotosAlbum(meme2Save.memedImage, self, #selector(imagePickerController(_:didFinishPickingMediaWithInfo:)), nil);
+        //TODO: Save to gallery:
+        //UIImageWriteToSavedPhotosAlbum(meme2Save.memedImage, self, #selector(imagePickerController(_:didFinishPickingMediaWithInfo:)), nil);
         
-        // Bring out iOS Message App:
-        let activityVC = UIActivityViewController(activityItems:[meme2Save.memedImage], applicationActivities:nil);
-        self.present(activityVC, animated:true, completion:nil);
+        //TODO: Bring out iOS Message App:
+        //let activityVC = UIActivityViewController(activityItems:[meme2Save.memedImage], applicationActivities:nil);
+        //self.present(activityVC, animated:true, completion:nil);
     }
     
-    func coSetNavAndToolbar(hide: Bool) {
+    func coSetNavAndToolbar(hide:Bool) {
         //Helper method to reduce code duplication
-        navigationController?.setNavigationBarHidden(hide, animated: false);
+        navigationController?.setNavigationBarHidden(hide, animated:false);
         self.bottomToolbar.isHidden = hide;
+        bottomTextField.isHidden = !hide;
+        topTextField.isHidden = !hide;
+    }
+    
+    func returnToRoot() {
+        //Helper method to reduce code duplication
+        self.dismiss(animated:true, completion:nil);
+        self.navigationController?.popViewController(animated:true);
     }
 
-    //MARK: - Methods to handle memes
-    @IBAction func pickImage(_ sender: Any) {
+    
+    //MARK: - Methods to handle a meme
+    func pickImageHelper(_ sourceType:UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController();
         imagePicker.delegate = self;
-        imagePicker.sourceType = .photoLibrary;
-        present(imagePicker, animated:true, completion:nil);
+        imagePicker.sourceType = sourceType;
+        present(imagePicker, animated:true, completion:nil); //present image
+        self.shareButton?.isEnabled = true; //enable Share Button
     }
-    
-    @IBAction func pickCameraImg(_ sender: Any) {
-        let cameraImgPicker = UIImagePickerController();
-        cameraImgPicker.delegate = self;
-        cameraImgPicker.sourceType = .camera;
-        present(cameraImgPicker, animated:true, completion:nil);
-    }
+    @IBAction func pickImgFromAlbum(_ sender: Any) {pickImageHelper(.photoLibrary);}
+    @IBAction func takeCameraPhoto(_ sender: Any) {pickImageHelper(.camera);}
     
     func createMemedImage() -> UIImage {
+        // Wrapper function
         coSetNavAndToolbar(hide: true);
 
         UIGraphicsBeginImageContext(self.view.frame.size);
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
-        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        view.drawHierarchy(in:self.view.frame, afterScreenUpdates:true);
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!;
         UIGraphicsEndImageContext();
 
         coSetNavAndToolbar(hide: false);
         return memedImage;
      }
     
-    
     @IBAction func shareMeme(_ sender: Any) {
         let memedImage = createMemedImage();
-        
-        // Save BEFORE changes:
-        let meme2Save = Meme(self.topTextField.text!, self.bottomTextField.text!, self.imageView.image!, memedImage);
+        let meme2Save = Meme(topTextField.text ?? "", bottomTextField.text ?? "", memedImage);
         saveMeme(meme2Save);
         
-        //Invoke meme setting:
-        self.bottomTextField.text = "";
-        self.topTextField.text = "";
+        self.imageView.image = memedImage;
         self.imageView.contentMode = .scaleAspectFill;
-        self.imageView.image = memedImage; //overwrite
+        
+        returnToRoot();
     }
+    
+    @IBAction func cancelMeme(_ sender: Any) {
+        returnToRoot();
+    }
+    
     
     //MARK: - Methods to customize keyboards
     @objc func keyboardWillShow(_ notification: Notification) {
