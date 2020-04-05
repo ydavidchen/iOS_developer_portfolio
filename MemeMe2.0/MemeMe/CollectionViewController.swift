@@ -4,6 +4,7 @@
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
 
 import UIKit;
+import Foundation;
 
 /**
 Class methods should be consistent with TableViewController
@@ -29,7 +30,7 @@ class CollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        //CollectionView FlowLayout:
+        //CollectionView Flow Layout:
         let dimension = (view.frame.size.width - 2*FL_SPACE) / 3.0;
         flowLayout.minimumInteritemSpacing = FL_SPACE;
         flowLayout.minimumLineSpacing = FL_SPACE;

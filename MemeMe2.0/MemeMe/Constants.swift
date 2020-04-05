@@ -16,12 +16,6 @@ struct Constants {
     static let ID_TABBAR = "TabBarController";
     
     //MARK: - Reusable static methods to reduce code duplication & increase consistency
-    static func getMemesFromAppDele() -> [Meme] {
-        // Helper function to retrieve a running dictionary of memes from AppDelegate
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate;
-        return appDelegate.memes;
-    }
-    
     static func getMeme(_ memes:[Meme], _ indexPath: IndexPath) -> Meme {
         // Helper function to get `indexPath`-th meme by passing in a dictionary of Memes
         let rowIndex = (indexPath as NSIndexPath).row;

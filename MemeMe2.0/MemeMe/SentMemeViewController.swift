@@ -89,14 +89,14 @@ class SentMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func createMemedImage() -> UIImage {
         // Wrapper function
-        coSetNavAndToolbar(hide: true);
+        coSetNavAndToolbar(hide:true);
 
         UIGraphicsBeginImageContext(self.view.frame.size);
         view.drawHierarchy(in:self.view.frame, afterScreenUpdates:true);
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!;
         UIGraphicsEndImageContext();
 
-        coSetNavAndToolbar(hide: false);
+        coSetNavAndToolbar(hide:false);
         return memedImage;
      }
     
