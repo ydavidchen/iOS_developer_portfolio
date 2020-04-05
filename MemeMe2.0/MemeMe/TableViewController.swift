@@ -10,12 +10,17 @@ Class methods should be consistent with CollectionViewController
 */
 class TableViewController: UITableViewController {
     //MARK: - Properites & UI elements
-    var memes = [Meme]();
+    var memes = Constants.getMemesFromAppDele();
     
     //MARK: - Lifecycle methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         self.tabBarController?.tabBar.isHidden = false; //keep TabBar on by on start
+    }
+    
+    //MARK: - Custom methods:
+    @IBAction func addMeme(_ sender: Any) {
+        Constants.triggerSentMemeVC(self.storyboard!, self.navigationController!);
     }
     
     //MARK: - TableView contract implementations
@@ -24,17 +29,10 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell(); //placeholder
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //Instantiate ViewController:
-        let sentMemeVC = self.storyboard?.instantiateViewController(identifier:Meme.ID_TABLE) as! ViewController;
-        
-        //Pass/store data:
-        sentMemeVC.meme = Meme.getMeme(memes, indexPath);
-        
-        //Present to view controller:
-        self.navigationController?.pushViewController(sentMemeVC, animated: true);
+        let meme = Constants.getMeme(memes, indexPath);
+        let cell = tableView.dequeueReusableCell(withIdentifier:Constants.ID_TABLEVIEW) as! TableViewCell;
+        cell.memeImageView.image = meme.memedImage;
+        cell.memeLabel.text = "\(meme.topField)...\(meme.bottomField)";
+        return cell;
     }
 }

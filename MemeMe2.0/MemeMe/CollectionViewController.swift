@@ -10,7 +10,9 @@ Class methods should be consistent with TableViewController
 */
 class CollectionViewController: UICollectionViewController {
     //MARK: - Properites & UI elements
-    var memes = [Meme]();
+    var memes = Constants.getMemesFromAppDele();
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!;
+    let FL_SPACE: CGFloat = 3.0; //flowlayout
 
     //MARK: - Lifecycle methods
     override func viewWillAppear(_ animated: Bool) {
@@ -20,7 +22,17 @@ class CollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        //TODO: FlowLayout
+        
+        //CollectionView FlowLayout:
+        let dimension = (view.frame.size.width - 2*FL_SPACE) / 3.0;
+        flowLayout.minimumInteritemSpacing = FL_SPACE;
+        flowLayout.minimumLineSpacing = FL_SPACE;
+        flowLayout.itemSize = CGSize(width:dimension, height:dimension);
+    }
+    
+    //MARK: - Custom methods:
+    @IBAction func addMeme(_ sender: Any) {
+        Constants.triggerSentMemeVC(self.storyboard!, self.navigationController!);
     }
     
     //MARK: - CollectionView contract implementations
@@ -29,13 +41,10 @@ class CollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell(); //placeholder
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO: Optimize code by avoiding code duplication
-        let sentMemeVC = self.storyboard?.instantiateViewController(identifier:Meme.ID_TABLE) as! ViewController;
-        sentMemeVC.meme = Meme.getMeme(memes, indexPath);
-        self.navigationController?.pushViewController(sentMemeVC, animated: true);
+        let meme = Constants.getMeme(memes, indexPath);
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:Constants.ID_COLLECTIONVIEW, for:indexPath) as! CollectionViewCell;
+        cell.imageView.image = meme.memedImage;
+        return cell;
     }
 }

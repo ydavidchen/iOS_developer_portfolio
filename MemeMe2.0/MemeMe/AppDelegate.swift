@@ -7,6 +7,10 @@ import UIKit;
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    //MARK: Objects for saving memes
+    var memes = [Meme](); //initialise for the very first time?
+    
+    //MARK: - Built-in methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         return true
     }

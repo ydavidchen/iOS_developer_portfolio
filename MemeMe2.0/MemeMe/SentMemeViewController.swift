@@ -1,11 +1,11 @@
-//  ViewController.swift
+//  SentMemeViewController.swift
 //  MemeMe version 2.0
 //  Created by DavidKevinChen on 4/4/20
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
 
 import UIKit;
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate {
+class SentMemeViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate {
     //MARK: - Properites & UI elements
     var meme: Meme!; //unwrapped optional REQUIERD to avoid compile-time error
     
@@ -17,39 +17,47 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     @IBOutlet weak var shareButton: UIBarButtonItem!; //disable for MemeMe1.0
     @IBOutlet weak var cancelButton: UIBarButtonItem!;
     
-    let MEME_TEXT_ATTR: [NSAttributedString.Key:Any] = [
-        NSAttributedString.Key.font: UIFont(name:"HelveticaNeue-CondensedBlack", size:40)!,
-        NSAttributedString.Key.foregroundColor: UIColor.black,
-        NSAttributedString.Key.strokeColor: UIColor.gray,
-        NSAttributedString.Key.strokeWidth: 0.5
-    ];
-    
     //MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad();
         
+        // Default UI appearance:
         topTextField.text = "TOP";
         bottomTextField.text = "BOTTOM";
         topTextField.textAlignment = NSTextAlignment.center;
         bottomTextField.textAlignment = NSTextAlignment.center;
-        topTextField.defaultTextAttributes = MEME_TEXT_ATTR;
-        bottomTextField.defaultTextAttributes = MEME_TEXT_ATTR;
-    
+        topTextField.defaultTextAttributes = Meme.MEME_TEXT_ATTR;
+        bottomTextField.defaultTextAttributes = Meme.MEME_TEXT_ATTR;
+        
+        // Assign TableView delegate implemented in this script:
         topTextField.delegate = self;
         bottomTextField.delegate = self;
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
-        
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera);
         subscribeToKeyboardNotif();
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated);
-        
         unsubscribeToKeyboardNotif();
+    }
+    
+    //MARK: - Helper functions for program abstraction:
+    func saveMeme(_ meme2Save:Meme) {
+        //Helper to pass current meme data to AppDelegate for sharing across other VCs
+        let object = UIApplication.shared.delegate;
+        let appDelegate = object as! AppDelegate;
+        appDelegate.memes.append(meme2Save);
+        
+        // Save to gallery:
+        UIImageWriteToSavedPhotosAlbum(meme2Save.memedImage, self, #selector(imagePickerController(_:didFinishPickingMediaWithInfo:)), nil);
+        
+        // Bring out iOS Message App:
+        let activityVC = UIActivityViewController(activityItems:[meme2Save.memedImage], applicationActivities:nil);
+        self.present(activityVC, animated:true, completion:nil);
     }
     
     func coSetNavAndToolbar(hide: Bool) {
@@ -58,7 +66,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         self.bottomToolbar.isHidden = hide;
     }
 
-    /* MARK: - Methods to handle memes */
+    //MARK: - Methods to handle memes
     @IBAction func pickImage(_ sender: Any) {
         let imagePicker = UIImagePickerController();
         imagePicker.delegate = self;
@@ -73,7 +81,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         present(cameraImgPicker, animated:true, completion:nil);
     }
     
-    func assembleMeme() -> UIImage {
+    func createMemedImage() -> UIImage {
         coSetNavAndToolbar(hide: true);
 
         UIGraphicsBeginImageContext(self.view.frame.size);
@@ -87,10 +95,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     
     
     @IBAction func shareMeme(_ sender: Any) {
+        let memedImage = createMemedImage();
+        
+        // Save BEFORE changes:
+        let meme2Save = Meme(self.topTextField.text!, self.bottomTextField.text!, self.imageView.image!, memedImage);
+        saveMeme(meme2Save);
+        
+        //Invoke meme setting:
         self.bottomTextField.text = "";
         self.topTextField.text = "";
-        self.imageView.image = assembleMeme();
         self.imageView.contentMode = .scaleAspectFill;
+        self.imageView.image = memedImage; //overwrite
     }
     
     //MARK: - Methods to customize keyboards
@@ -129,7 +144,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = image;
         } else {
-            print("imagePickerController() " + Meme.ERROR_TAG);
+            print("imagePickerController() " + Constants.ERROR_TAG);
         }
         dismiss(animated: true, completion: nil);
     }
