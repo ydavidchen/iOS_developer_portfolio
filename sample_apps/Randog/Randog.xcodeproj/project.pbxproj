@@ -15,6 +15,7 @@
 		A6AAB93B2440D7D300ABA50D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6AAB9392440D7D300ABA50D /* LaunchScreen.storyboard */; };
 		A6AAB9472440DAA500ABA50D /* DogAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AAB9462440DAA500ABA50D /* DogAPI.swift */; };
 		A6AAB9492440E7E500ABA50D /* DogImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AAB9482440E7E500ABA50D /* DogImage.swift */; };
+		A6B1AA78244247A1003EF698 /* BreedsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B1AA77244247A1003EF698 /* BreedsListResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A6AAB93C2440D7D300ABA50D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6AAB9462440DAA500ABA50D /* DogAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPI.swift; sourceTree = "<group>"; };
 		A6AAB9482440E7E500ABA50D /* DogImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogImage.swift; sourceTree = "<group>"; };
+		A6B1AA77244247A1003EF698 /* BreedsListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedsListResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				A6AAB9462440DAA500ABA50D /* DogAPI.swift */,
 				A6AAB9482440E7E500ABA50D /* DogImage.swift */,
+				A6B1AA77244247A1003EF698 /* BreedsListResponse.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				A6AAB9332440D7D100ABA50D /* ViewController.swift in Sources */,
 				A6AAB9492440E7E500ABA50D /* DogImage.swift in Sources */,
 				A6AAB92F2440D7D100ABA50D /* AppDelegate.swift in Sources */,
+				A6B1AA78244247A1003EF698 /* BreedsListResponse.swift in Sources */,
 				A6AAB9312440D7D100ABA50D /* SceneDelegate.swift in Sources */,
 				A6AAB9472440DAA500ABA50D /* DogAPI.swift in Sources */,
 			);

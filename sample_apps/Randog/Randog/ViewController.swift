@@ -12,18 +12,33 @@ Extension to use & customize data fetching from Web API
 class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!;
     @IBOutlet weak var pickerView: UIPickerView!;
-    let breeds: [String] = ["greyhound", "poodle"];
     
+    let NUMVIEWS = 1;
+    var breeds:[String] = []; //var not let, s.t. can be updated
+    
+    //MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad();
         
+        // Set delegate & data source to Extension implementations
         pickerView.dataSource = self;
         pickerView.delegate = self;
+        
+        DogAPI.requestBreedsList(completionHandler:handleBreedsListResponse(breeds:error:));
     }
     
-    //MARK: - Abstracted method for accessing API (outer async task)
+    //MARK: - Abstracted method for accessing API
+    func handleBreedsListResponse(breeds:[String], error:Error?) {
+        self.breeds = breeds;
+        DispatchQueue.main.async {
+            self.pickerView.reloadAllComponents();
+        }
+    }
+    
     func handleRandomImgResponse(imageData:DogImage?, error:Error?) {
-        guard let imageUrl = URL(string:imageData?.message ?? "") else {return;};
+        guard let imageUrl = URL(string:imageData?.message ?? "") else {
+            return;
+        };
         DogAPI.requestImageFile(imageUrl:imageUrl, completionHandler:self.handleImgFileResponse(image:error:));
     }
     
@@ -41,8 +56,7 @@ Extension to handle use PickerView API
 extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     // Populates picker view UI:
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        // Number of sections in the table
-        return 1;
+        return NUMVIEWS; //MUST BE ONE!
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
