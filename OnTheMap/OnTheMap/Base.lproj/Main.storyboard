@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="428" y="362"/>
         </scene>
-        <!--Map View Controller-->
+        <!--MapViewController-->
         <scene sceneID="Zth-4e-K8h">
             <objects>
-                <viewController id="mi7-48-tyE" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" title="MapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mi7-48-tyE" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ioN-VP-sHk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,7 +125,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="mmX-i6-Khc" kind="show" id="CQh-kQ-6De"/>
+                                    <action selector="authenticateLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="36R-5p-gsJ"/>
+                                    <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NBc-uH-hn3"/>
+                                    <segue destination="mmX-i6-Khc" kind="show" id="a4P-JG-XFz"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="wb1-Rd-gSA">
@@ -143,6 +145,10 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBP-uc-6f8">
                                 <rect key="frame" x="269" y="498" width="55" height="30"/>
                                 <state key="normal" title="Sign UP"/>
+                                <connections>
+                                    <action selector="signupClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n7C-bz-seb"/>
+                                    <action selector="signupTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A6N-d3-Fie"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -171,6 +177,7 @@
                         <outlet property="emailTextField" destination="Xsc-PI-fGU" id="P11-GW-dcE"/>
                         <outlet property="loginButton" destination="KaK-iO-40F" id="7po-1n-AIA"/>
                         <outlet property="passwordTextField" destination="O68-WH-gce" id="IkD-1e-JTC"/>
+                        <outlet property="signupButton" destination="mBP-uc-6f8" id="owi-94-i10"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
