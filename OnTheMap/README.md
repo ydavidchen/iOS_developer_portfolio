@@ -11,7 +11,10 @@ This app features:
 * Navigation View with Map and Table Lists (_Parse API_)
 * Post check-in pin and link
 
-Note: I followed _specifications_ outlined in [this document](https://docs.google.com/document/d/1tPF1tmSzVYPSbpl7_JCeMKglKMIs3dUa4OrSAKEYNAs/pub?embedded=true), which appears to have some discrepancies compared to the Udacity Video DEMO lecture.
+Notes:
+
+* For the tasks and views (which I referred to as "activities"), followed _specifications_ outlined in [this document](https://docs.google.com/document/d/1tPF1tmSzVYPSbpl7_JCeMKglKMIs3dUa4OrSAKEYNAs/pub?embedded=true), which appears to have some discrepancies compared to the Udacity Video DEMO lecture.
+* For map-related functionality, I leveraged some built-in utility from Apple, beyond what the Nanodegree lectures covered
 
 ## Credit
 

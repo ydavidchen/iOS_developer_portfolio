@@ -15,5 +15,16 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
     }
+    
+    //MARK: Actions
+    //@note: Currently, LOGOUT functionality is only on 1 tab, which could be extended to the table view via brute-force method
+    @IBAction func logoutTapped(_ sender: Any) {
+        AccountClient.logout {
+            DispatchQueue.main.async {
+                self.dismiss(animated:true, completion:nil);
+            }
+        }
+    }
+    
 }
 

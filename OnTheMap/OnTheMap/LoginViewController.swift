@@ -8,6 +8,9 @@ import Foundation;
 
 class LoginViewController: UIViewController {
     //MARK: - Outlets
+    @IBOutlet weak var emailTextField: UITextField!;
+    @IBOutlet weak var passwordTextField: UITextField!;
+    @IBOutlet weak var loginButton: UIButton!;
     
     //MARK: - Fields/Properties
     

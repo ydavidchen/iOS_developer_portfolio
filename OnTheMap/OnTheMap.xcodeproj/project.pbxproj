@@ -17,6 +17,8 @@
 		A65F94E42442BE4D00CCFDB6 /* InfoPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F94E32442BE4D00CCFDB6 /* InfoPostingViewController.swift */; };
 		A65F94E62442BE6B00CCFDB6 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F94E52442BE6B00CCFDB6 /* AddLocationViewController.swift */; };
 		A65F94E82442BFB800CCFDB6 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65F94E72442BFB800CCFDB6 /* TableViewController.swift */; };
+		A66D10E82442C4F0005D7E66 /* AccountClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D10E72442C4F0005D7E66 /* AccountClient.swift */; };
+		A66D10EA2442C5DC005D7E66 /* LogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D10E92442C5DC005D7E66 /* LogoutRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		A65F94E32442BE4D00CCFDB6 /* InfoPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPostingViewController.swift; sourceTree = "<group>"; };
 		A65F94E52442BE6B00CCFDB6 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		A65F94E72442BFB800CCFDB6 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		A66D10E72442C4F0005D7E66 /* AccountClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountClient.swift; sourceTree = "<group>"; };
+		A66D10E92442C5DC005D7E66 /* LogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 		A65F94E02442B5BF00CCFDB6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A66D10E72442C4F0005D7E66 /* AccountClient.swift */,
+				A66D10E92442C5DC005D7E66 /* LogoutRequest.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -175,7 +181,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A65F94CD2442B56900CCFDB6 /* LoginViewController.swift in Sources */,
+				A66D10EA2442C5DC005D7E66 /* LogoutRequest.swift in Sources */,
 				A65F94E82442BFB800CCFDB6 /* TableViewController.swift in Sources */,
+				A66D10E82442C4F0005D7E66 /* AccountClient.swift in Sources */,
 				A65F94E62442BE6B00CCFDB6 /* AddLocationViewController.swift in Sources */,
 				A65F94C92442B56900CCFDB6 /* AppDelegate.swift in Sources */,
 				A65F94E22442BE1700CCFDB6 /* MapViewController.swift in Sources */,
