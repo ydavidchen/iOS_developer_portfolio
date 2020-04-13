@@ -6,11 +6,10 @@
 import Foundation;
 
 class AccountClient {
-    static let apiKey = "Udacity_API_KEY"; //TODO
+    static let LINK_SU = "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated";
     
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
-        static let apiKeyParam = "?api_key=\(AccountClient.apiKey)"
         
         case login;
         case getUser;

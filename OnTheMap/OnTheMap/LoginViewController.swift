@@ -7,40 +7,66 @@ import UIKit;
 import Foundation;
 
 class LoginViewController: UIViewController {
-    //MARK: - Outlets
+    //MARK: - Outlet UI
     @IBOutlet weak var emailTextField: UITextField!;
     @IBOutlet weak var passwordTextField: UITextField!;
     @IBOutlet weak var loginButton: UIButton!;
     @IBOutlet weak var signupButton: UIButton!;
     
-    //MARK: - Fields/Properties
-    
-    //MARK: Lifecycle methods
+    //MARK: - Lifecycle methods
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        super.viewDidLoad();
     }
     
-    //MARK: Actions
+    //MARK: - Outlet Actions
     @IBAction func loginTapped(_ sender: Any) {
-        let isAuth = authenticate(emailTextField.text ?? "", passwordTextField.text ?? "");
+        setLogin(true);
         
-        if isAuth {
-            print("Continue to main page");
-            // performSegue(withIdentifier:"MapViewController", sender:nil);
-        } else {
-            print("Authentication failed!");
-        }
+        // DEVELOPMENT MODE: To streamline login, bypass the formal authentication process
+        handleLoginResponse(success:true, error:nil);
     }
     
     @IBAction func signupClicked(_ sender: Any) {
-        let LINK_SU = "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated";
-        guard let url = URL(string:LINK_SU) else {return;}
+        guard let url = URL(string:AccountClient.LINK_SU) else {return;}
         UIApplication.shared.open(url);
     }
     
-    //MARK: Helper/wrapper methods
-    func authenticate(_ email:String, _ password:String) -> Bool {
-        return true; //placeholder
+    //MARK: - Callbacks/completion handlers
+    func handleRequestTokenResponse(success:Bool, error:Error?) {
+        if success {
+            print("AccountClient.login() called");
+            DispatchQueue.main.async {
+                AccountClient.login(
+                    username: self.emailTextField.text ?? "",
+                    password: self.passwordTextField.text ?? "",
+                    completion: self.handleLoginResponse(success:error:)
+                );
+            }
+        } else {
+            alertFailedLogin(message: error?.localizedDescription ?? "Unknown error");
+        }
     }
+    
+    func handleLoginResponse(success:Bool, error:Error?) {
+        setLogin(false);
+        if success {
+            performSegue(withIdentifier:"completeLogin", sender:nil);
+        } else {
+            alertFailedLogin(message: error?.localizedDescription ?? "Unknown error");
+        }
+    }
+    
+    //MARK: - Helper/wrapper methods
+    func setLogin(_ loggingIn:Bool) {
+        emailTextField.isEnabled = !loggingIn;
+        passwordTextField.isEnabled = !loggingIn;
+        loginButton.isEnabled = !loggingIn;
+    }
+    
+    func alertFailedLogin(message:String) {
+        let alertVC = UIAlertController(title:"Login failed!", message:message, preferredStyle:.alert);
+        alertVC.addAction(UIAlertAction(title:"Dismiss", style:.default, handler: nil));
+        show(alertVC, sender: nil);
+    }
+    
 }

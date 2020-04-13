@@ -1,11 +1,10 @@
-//  LogoutRequest.swift
+//  LoginRequest.swift
 //  OnTheMap
-//  Created by DavidKevinChen on 4/11/20.
+//  Created by DavidKevinChen on 4/12/20.
 //  Copyright © 2020 DavidKevinChen. All rights reserved.
 
-import Foundation;
-
-struct LogoutRequest: Codable {
+import Foundation
+struct LoginRequest: Codable {
     let udacity: [String];
     let username: String;
     let password: String;
@@ -16,3 +15,4 @@ struct LogoutRequest: Codable {
         case udacity;
     }
 }
+
