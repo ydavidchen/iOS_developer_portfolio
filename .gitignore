@@ -1,12 +1,32 @@
 # David's default .gitignore file, curated over time
 
+## Directories
 data/
 results/
-submissions/
-ios_playground/
 .IDEA/
-.ipynb_checkpoints
 
+playgrounds/
+specifications/
+submissions/
+
+# Any files storing API Keys
+apikey*
+APIKEY*
+
+# LaTex-specific
+*.aux
+*.bbl
+*.blg
+*.lof
+*.lot
+*.log
+*.toc
+*.nlo
+*.out
+*.syntex
+
+## Other - General
+.ipynb_checkpoints
 .DS_Store
 .DS_Store?
 .Rhistory
