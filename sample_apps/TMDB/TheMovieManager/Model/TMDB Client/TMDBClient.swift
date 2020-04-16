@@ -6,7 +6,6 @@
 import Foundation;
 
 class TMDBClient {
-    //TODO: Figure out what this object does!!!
     struct Auth {
         static var accountId = 0;
         static var requestToken = "";
@@ -31,7 +30,7 @@ class TMDBClient {
             case .getRequestToken:
                 return Endpoints.base + "/authentication/token/new" + Endpoints.apiKeyParam;
             case .login:
-                return Endpoints.base + "/authentication/token/validate_with_login" + Auth.requestToken;
+                return Endpoints.base + "/authentication/token/validate_with_login" + Endpoints.apiKeyParam;
             case .createSessionId:
                 return Endpoints.base + "/authentication/session/new" + Endpoints.apiKeyParam;
             }
