@@ -26,6 +26,15 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginViaWebsiteTapped() {
         // performSegue(withIdentifier: "completeLogin", sender: nil)
+        TMDBClient.getRequestToken {(success,error) in
+            if success {
+                UIApplication.shared.open(
+                    TMDBClient.Endpoints.webAuth.url,
+                    options: [:],
+                    completionHandler: nil
+                );
+            }
+        }
     }
     
     
@@ -33,14 +42,12 @@ class LoginViewController: UIViewController {
     func handleRequestTokenResponse(success:Bool, error:Error?) {
         if success {
             print("DEBUG: handleRequestTokenResponse() called");
-            DispatchQueue.main.async {
-                TMDBClient.login(
-                    username: self.emailTextField.text ?? "",
-                    password: self.passwordTextField.text ?? "",
-                    completion: self.handleLoginResponse(success:error:)
-                );
-                print("INFO: Auth request_token within handleRequestResponse(): " + TMDBClient.Auth.requestToken);
-            }
+            TMDBClient.login(
+                username: self.emailTextField.text ?? "",
+                password: self.passwordTextField.text ?? "",
+                completion: self.handleLoginResponse(success:error:)
+            );
+            print("INFO: Auth request_token within handleRequestResponse(): " + TMDBClient.Auth.requestToken);
         } else {
             print("ERROR: Failed to involke handleRequestTokenResponse()");
         }
@@ -59,6 +66,8 @@ class LoginViewController: UIViewController {
         if success {
             print("INFO: Auth sessionId=" + TMDBClient.Auth.sessionId);
             DispatchQueue.main.async {
+                self.emailTextField.text = "";
+                self.passwordTextField.text = "";
                 self.performSegue(withIdentifier:"completeLogin", sender:nil);
             }
         }
