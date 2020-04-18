@@ -55,7 +55,7 @@ class TMDBClient {
      MARK: - Class functions matching the Endpoint cases
      */
     class func getWatchlist(completion: @escaping ([Movie],Error?) -> Void) { //GET 1/1; given by Udacity as example
-        taskForGETRequest(url: Endpoints.getWatchlist.url, response: MovieResults.self) { (response,error) in
+        taskForGETRequest(url:Endpoints.getWatchlist.url, responseType:MovieResults.self) {(response,error) in
             if let response = response {
                 completion(response.results, nil);
             } else {
@@ -65,7 +65,7 @@ class TMDBClient {
     }
     
     class func getRequestToken(completion: @escaping (Bool,Error?) -> Void) { //GET 2/2
-        taskForGETRequest(url: Endpoints.getRequestToken.url, response: RequestTokenResponse.self){ (response,error) in
+        taskForGETRequest(url: Endpoints.getRequestToken.url, responseType:RequestTokenResponse.self){ (response,error) in
             if let response = response {
                 Auth.requestToken = response.requestToken;
                 completion(true, nil);
@@ -76,62 +76,29 @@ class TMDBClient {
     }
     
     class func login(username:String, password:String, completion: @escaping (Bool,Error?) -> Void) { //POST 1/2
-        // Input params same as getRequestToken, plus username + password
-        var request = URLRequest(url:Endpoints.login.url);
-        request.httpMethod = "POST"; //Default is GET, and we override
-        request.addValue("application/json", forHTTPHeaderField:"Content-Type");
-        
         let body = LoginRequest(username:username, password:password, requestToken:Auth.requestToken);
-        request.httpBody = try! JSONEncoder().encode(body);
-        
-        // Task via trail-enclosure syntax:
-        let task = URLSession.shared.dataTask(with:request) {(data, response, error) in
-            guard let data = data else {
-                print("ERROR: Failed to login()");
-                completion(false, error);
-                return;
-            }
-            
-            // Catch response, or error if fails:
-            do {
-                let decoder = JSONDecoder();
-                let responseObject = try decoder.decode(RequestTokenResponse.self, from:data);
-                print("DEBUG: Auth.requestToken in TMDBClicne.login(): " + Auth.requestToken);
-                Auth.requestToken = responseObject.requestToken;
+        taskForPOSTRequest(url:TMDBClient.Endpoints.login.url, responseType:RequestTokenResponse.self, body:body) { (response, error) in
+            if let response = response {
+                Auth.requestToken = response.requestToken;
                 completion(true, nil);
-            } catch {
-                print("ERROR: Failed to invoke TMDBClient.login()!");
+                return
+            } else {
                 completion(false, error);
             }
         }
-        task.resume();
     }
     
     class func createSessionId(completion: @escaping (Bool,Error?) -> Void) { //POST 2/2
-        var request = URLRequest(url:Endpoints.createSessionId.url);
-        request.httpMethod = "POST";
-        request.addValue("application/json", forHTTPHeaderField:"Content-Type");
-        
         let body = PostSession(requestToken:Auth.requestToken); //TODO: Updated
-        request.httpBody = try! JSONEncoder().encode(body);
-        
-        let task = URLSession.shared.dataTask(with:request) {(data, response, error) in
-            guard let data = data else {
-                print("ERROR: Failed to request session ID");
-                completion(false, error);
-                return;
-            }
-            
-            do {
-                let decoder = JSONDecoder();
-                let responseObject = try decoder.decode(SessionResponse.self, from:data); //TODO: Updated
-                Auth.sessionId = responseObject.sessionId; //TODO: Updated
+        taskForPOSTRequest(url:Endpoints.createSessionId.url, responseType:SessionResponse.self, body:body) {(response, error) in
+            if let response = response {
+                Auth.sessionId = response.sessionId; //TODO: Updated
                 completion(true, nil);
-            } catch {
+                return
+            } else {
                 completion(false, error);
             }
         }
-        task.resume();
     }
     
     class func logout(completion: @escaping () -> Void) { //for logging out: nothing is to be passed back
@@ -152,10 +119,10 @@ class TMDBClient {
     
     
     /*
-     MARK: - Helper functions for re-factoring class-method code
+     MARK: - Reusable helper functions for re-factoring class-method code
      */
-    class func taskForGETRequest<ResponseType:Decodable>(url:URL, response:ResponseType.Type, completion: @escaping (ResponseType?,Error?) -> Void) { //makes use of Swift Generics; NOTE SYNTAX!!!
-        let task = URLSession.shared.dataTask(with:url) { (data,response,error) in
+    class func taskForGETRequest<ResponseType:Decodable>(url:URL, responseType:ResponseType.Type, completion: @escaping (ResponseType?,Error?) -> Void) { //makes use of Swift Generics; NOTE SYNTAX!!!
+        let task = URLSession.shared.dataTask(with:url) {(data,response,error) in
             // Get data:
             guard let data = data else {
                 completion(nil, error);
@@ -176,6 +143,36 @@ class TMDBClient {
             }
         }
         task.resume();
+    }
+    
+    class func taskForPOSTRequest<RequestType:Encodable, ResponseType:Decodable>(url:URL, responseType:ResponseType.Type, body:RequestType, completion: @escaping (ResponseType?,Error?) -> Void) {
+        var request = URLRequest(url:url);
+        request.httpMethod = "POST";
+        request.addValue("application/json", forHTTPHeaderField:"Content-Type");
+        request.httpBody = try! JSONEncoder().encode(body);
+        
+        let task = URLSession.shared.dataTask(with:request) {(data, response, error) in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error);
+                }
+                return;
+            }
+
+            do {
+                let decoder = JSONDecoder();
+                let responseObject = try decoder.decode(ResponseType.self, from:data);
+                DispatchQueue.main.async {
+                    completion(responseObject, nil);
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil, error);
+                }
+            }
+        }
+        task.resume();
+        
     }
     
 }

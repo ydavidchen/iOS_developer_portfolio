@@ -65,11 +65,9 @@ class LoginViewController: UIViewController {
         print("DEBUG: handleSessionResponse() called");
         if success {
             print("INFO: Auth sessionId=" + TMDBClient.Auth.sessionId);
-            DispatchQueue.main.async {
-                self.emailTextField.text = "";
-                self.passwordTextField.text = "";
-                self.performSegue(withIdentifier:"completeLogin", sender:nil);
-            }
+            self.emailTextField.text = "";
+            self.passwordTextField.text = "";
+            self.performSegue(withIdentifier:"completeLogin", sender:nil);
         }
     }
 }
