@@ -53,7 +53,7 @@
 		231688642121CA51003C820E /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		231688692121CADA003C820E /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		2316886B2121CAF6003C820E /* TMDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBClient.swift; sourceTree = "<group>"; };
-		231688722121CB2D003C820E /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		231688722121CB2D003C820E /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieModel.swift; path = ../Data/MovieModel.swift; sourceTree = "<group>"; };
 		231688742121CB43003C820E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		231688762121CB50003C820E /* MovieResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResults.swift; sourceTree = "<group>"; };
 		231688782121CB74003C820E /* RequestTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTokenResponse.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		2316888C2122322D003C820E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		2316888E2122646A003C820E /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		2316889021226AE7003C820E /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
-		A66596392445678000984103 /* APIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKEY.swift; sourceTree = "<group>"; };
+		A66596392445678000984103 /* APIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIKEY.swift; path = ../Data/APIKEY.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +115,7 @@
 		2316885A2121C941003C820E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				231688712121CB22003C820E /* Data */,
+				A6E8A443244B9ED3006B17D2 /* Data */,
 				231688662121CA71003C820E /* TMDB Client */,
 				231688672121CA79003C820E /* TMDB Requests */,
 				231688682121CA87003C820E /* TMDB Responses */,
@@ -191,13 +191,13 @@
 			path = "TMDB Responses";
 			sourceTree = "<group>";
 		};
-		231688712121CB22003C820E /* Data */ = {
+		A6E8A443244B9ED3006B17D2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				231688722121CB2D003C820E /* MovieModel.swift */,
 				A66596392445678000984103 /* APIKEY.swift */,
+				231688722121CB2D003C820E /* MovieModel.swift */,
 			);
-			path = Data;
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -6,55 +6,57 @@
 import UIKit;
 
 class FavoritesViewController: UIViewController {
+    //MARK: - Properties
+    @IBOutlet weak var tableView: UITableView!;
+    var selectedIndex = 0;
     
-    @IBOutlet weak var tableView: UITableView!
-    
-    var selectedIndex = 0
-    
+    //MARK: - Lifecycle Methods
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad();
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tableView.reloadData()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            let detailVC = segue.destination as! MovieDetailViewController
-            detailVC.movie = MovieModel.favorites[selectedIndex]
+        // Essentially the SAME as Watchlist, just different ID used
+        _ = TMDBClient.getFavourites() {(movies,error) in
+            MovieModel.favorites = movies;
+            self.tableView.reloadData();
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        
+        tableView.reloadData();
+    }
+    
+    override func prepare(for segue:UIStoryboardSegue, sender:Any?) {
+        if segue.identifier == "showDetail" {
+            let detailVC = segue.destination as! MovieDetailViewController;
+            detailVC.movie = MovieModel.favorites[selectedIndex];
+        }
+    }
 }
 
-extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+/*
+Extension: TableView methods implementations
+*/
+extension FavoritesViewController: UITableViewDataSource,UITableViewDelegate {
+    func numberOfSections(in tableView:UITableView) -> Int {
+        return 1;
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MovieModel.favorites.count
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int {
+        return MovieModel.favorites.count;
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell")!
-        
-        let movie = MovieModel.favorites[indexPath.row]
-        
-        cell.textLabel?.text = movie.title
-        
-        return cell
+    func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"MovieTableViewCell")!;
+        let movie = MovieModel.favorites[indexPath.row];
+        cell.textLabel?.text = movie.title;
+        return cell;
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
-        performSegue(withIdentifier: "showDetail", sender: nil)
-        tableView.deselectRow(at: indexPath, animated: true)
+    func tableView(_ tableView:UITableView, didSelectRowAt indexPath:IndexPath) {
+        selectedIndex = indexPath.row;
+        performSegue(withIdentifier:"showDetail", sender:nil);
+        tableView.deselectRow(at:indexPath, animated:true);
     }
-    
 }

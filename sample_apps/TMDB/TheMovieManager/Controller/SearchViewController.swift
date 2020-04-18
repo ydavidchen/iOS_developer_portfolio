@@ -3,30 +3,33 @@
 //  Created by Owen LaRosa on 8/13/18.
 //  Copyright © 2018 Udacity. All rights reserved.
 
-import UIKit
+import UIKit;
 
 class SearchViewController: UIViewController {
+    @IBOutlet weak var searchBar: UISearchBar!;
+    @IBOutlet weak var tableView: UITableView!;
+
+    var movies = [Movie]();
+    var selectedIndex = 0;
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
-    
-    var movies = [Movie]()
-    
-    var selectedIndex = 0
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue:UIStoryboardSegue, sender:Any?) {
         if segue.identifier == "showDetail" {
-            let detailVC = segue.destination as! MovieDetailViewController
-            detailVC.movie = movies[selectedIndex]
+            let detailVC = segue.destination as! MovieDetailViewController;
+            detailVC.movie = movies[selectedIndex];
         }
     }
-    
 }
 
+/*
+Extension to handle search bar UI elements
+*/
 extension SearchViewController: UISearchBarDelegate {
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        //TODO:
+        TMDBClient.search(query:searchText) { (movies, error) in
+            self.movies = movies;
+            self.tableView.reloadData();
+        }
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
