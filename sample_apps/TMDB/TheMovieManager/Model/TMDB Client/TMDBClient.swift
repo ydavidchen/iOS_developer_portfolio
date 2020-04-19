@@ -46,7 +46,7 @@ class TMDBClient {
             case .createSessionId:
                 return Endpoints.base + "/authentication/session/new" + Endpoints.apiKeyParam;
             case .webAuth:
-                return "https://www.themoviedb.org/authenticate/" + Auth.requestToken + "?redirect_to=themoviemanager:authenticate"; //see doc
+                return "https://www.themoviedb.org/authenticate/" + Auth.requestToken + "?redirect_to=themoviemanager:authenticate";
             case .logout:
                 return Endpoints.base + "/authentication/session" + Endpoints.apiKeyParam;
             
@@ -54,7 +54,7 @@ class TMDBClient {
             case .search(let query): //note syntax; TODO: implement space handlinge
                 return Endpoints.base + "/search/movie" + Endpoints.apiKeyParam + "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")";
             case .addToWatchlist:
-                return Endpoints.base + "/account/\(Auth.accountId)/watchlist" + Endpoints.apiKeyParam;
+                return Endpoints.base + "/account/\(Auth.accountId)/watchlist" + Endpoints.apiKeyParam + "&session_id=\(Auth.sessionId)";
             }
         }
         
@@ -147,17 +147,16 @@ class TMDBClient {
     
     class func markWatchlist(movieId:Int, watchlist:Bool, completion: @escaping (Bool,Error?) -> Void) {
         // Called in **MovieDetailViewController**, NOT WatchlistViewController.swift
-        // Make POST request & parse into generic TMDBResponse
         let body = MarkWatchlist(mediaType:"movie", mediaId:movieId, watchlist:watchlist);
         
         taskForPOSTRequest(url:Endpoints.addToWatchlist.url, responseType:TMDBResponse.self, body:body) {(response,error) in
             if let response = response {
-                let compositeStatus = response.statusCode==1 || response.statusCode==13;
-                completion(compositeStatus, nil); //if parsing succeeds
                 print("DEBUG: Status returned = " + String(response.statusCode));
+                let compositeStatus = response.statusCode==1 || response.statusCode==12 || response.statusCode==13;
+                completion(compositeStatus, nil);
             } else {
                 print("ERROR: Failed to finish running markWatchlist()!");
-                completion(false, error);
+                completion(false, nil);
             }
         }
     }
@@ -168,13 +167,11 @@ class TMDBClient {
      */
     class func taskForGETRequest<ResponseType:Decodable>(url:URL, responseType:ResponseType.Type, completion: @escaping (ResponseType?,Error?) -> Void) { //makes use of Swift Generics; NOTE SYNTAX!!!
         let task = URLSession.shared.dataTask(with:url) {(data,response,error) in
-            // Get data:
             guard let data = data else {
                 completion(nil, error);
                 return;
             }
             
-            // Handle data received via parsing on Main Thread
             let decoder = JSONDecoder();
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from:data); //Decodes into Generics

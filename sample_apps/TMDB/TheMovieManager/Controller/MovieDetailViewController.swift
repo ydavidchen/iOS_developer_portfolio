@@ -27,7 +27,6 @@ class MovieDetailViewController: UIViewController {
     }
     
     @IBAction func watchlistButtonTapped(_ sender: UIBarButtonItem) {
-        //TODO:
         TMDBClient.markWatchlist(movieId:movie.id, watchlist:!isWatchlist, completion:handleWatchlistResponse(success:error:));
     }
     
@@ -48,18 +47,15 @@ class MovieDetailViewController: UIViewController {
     
     func handleWatchlistResponse(success:Bool, error:Error?) {
         // Callback/completion handler for TMDBClient.markWatchlist()
-        // NOTE: the logic, not implementation, is more important here
         if success {
+            print("DEBUG: handleWatchlistResponse() successfully called!");
             if isWatchlist {
-                // If movie on watchlist, it means we succesfully deleted it
                 MovieModel.watchlist = MovieModel.watchlist.filter() {$0 != self.movie;}
             } else {
-                // If not on watchlist, it means we successfully added it
                 MovieModel.watchlist.append(movie);
             }
             
-            // Update UI:
-            toggleBarButton(watchlistBarButtonItem, enabled:isWatchlist);
+            toggleBarButton(watchlistBarButtonItem, enabled:isWatchlist); //Updates UI:
         } else {
             print("ERROR: Failed to callback handleWatchlistResponse()!");
         }
