@@ -13,12 +13,12 @@ class TMDBClient {
         static var sessionId = "";
     }
     
-    // MARK: - Endpoints that rotatingly return URLs
+    //MARK: - Endpoints that rotatingly return URLs
     enum Endpoints {
         static let base = "https://api.themoviedb.org/3";
         static let apiKeyParam = "?api_key=\(APIKEY.apiKey)"; //construct API key into required format
         
-        // Cases for basic features
+        // Cases for basic features:
         case getWatchlist;
         case getFavourites;
         case getRequestToken;
@@ -29,7 +29,9 @@ class TMDBClient {
         
         // Cases for advanced features:
         case search(String); //associated value for search term
-        case addToWatchlist; //successful status codes: 1, 12, 13 - see doc
+        case addToWatchlist;
+        case addToFavourites;
+        case posterImage(String); //assoc value for poster path
         
         // Associated values:
         var stringValue: String {
@@ -55,6 +57,10 @@ class TMDBClient {
                 return Endpoints.base + "/search/movie" + Endpoints.apiKeyParam + "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")";
             case .addToWatchlist:
                 return Endpoints.base + "/account/\(Auth.accountId)/watchlist" + Endpoints.apiKeyParam + "&session_id=\(Auth.sessionId)";
+            case .addToFavourites:
+                return Endpoints.base + "/account/\(Auth.accountId)/favorite" + Endpoints.apiKeyParam + "&session_id=\(Auth.sessionId)";
+            case .posterImage(let posterPath):
+                return "https://image.tmdb.org/t/p/w500/" + posterPath;
             }
         }
         
@@ -68,7 +74,7 @@ class TMDBClient {
     /*
      MARK: - Class functions matching the Endpoint cases
      */
-    // MARK: - Basic functionalities
+    //MARK: - Basic functionalities
     class func getWatchlist(completion: @escaping ([Movie],Error?) -> Void) { //GET 1/1
         taskForGETRequest(url:Endpoints.getWatchlist.url, responseType:MovieResults.self) {(response,error) in
             if let response = response {
@@ -133,7 +139,7 @@ class TMDBClient {
         }
     }
     
-    // MARK: - Advanced functionalities
+    //MARK: - Advanced functionalities
     class func search(query:String, completion: @escaping ([Movie],Error?) -> Void) {
         // Called in SearchViewController.swift
         taskForGETRequest(url:Endpoints.search(query).url, responseType:MovieResults.self) {(response,error) in
@@ -151,7 +157,7 @@ class TMDBClient {
         
         taskForPOSTRequest(url:Endpoints.addToWatchlist.url, responseType:TMDBResponse.self, body:body) {(response,error) in
             if let response = response {
-                print("DEBUG: Status returned = " + String(response.statusCode));
+                print("DEBUG: markWatchlist() Status returned = " + String(response.statusCode));
                 let compositeStatus = response.statusCode==1 || response.statusCode==12 || response.statusCode==13;
                 completion(compositeStatus, nil);
             } else {
@@ -161,6 +167,28 @@ class TMDBClient {
         }
     }
     
+    class func markFavourites(movieId:Int, isFavourite:Bool, completion: @escaping (Bool,Error?) -> Void) {
+        let body = MarkFavorite(mediaId:movieId, mediaType:"movie", favourite:false); //TODO
+        taskForPOSTRequest(url:Endpoints.addToFavourites.url, responseType:TMDBResponse.self, body:body) {(response,error) in
+            if let response = response {
+                print("DEBUG: markFavourites() Status returned = " + String(response.statusCode));
+                let compositeStatus = response.statusCode==1 || response.statusCode==12 || response.statusCode==13;
+                completion(compositeStatus, nil);
+            } else {
+                print("ERROR: Failed to finish running markFavourites()!");
+                completion(false, nil);
+            }
+        }
+    }
+    
+    class func downloadPosterImage(path:String, completion: @escaping (Data?,Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with:Endpoints.posterImage(path).url) { (data,response,error) in
+            DispatchQueue.main.async {
+                completion(data, error);
+            }
+        }
+        task.resume();
+    }
     
     /*
      MARK: - Reusable helper functions for re-factoring class-method code, for both basic & advanced functionalities

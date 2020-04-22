@@ -3,7 +3,7 @@
 //  Created by Owen LaRosa on 8/13/18.
 //  Copyright © 2018 Udacity. All rights reserved.
 
-import UIKit
+import UIKit;
 
 class MovieDetailViewController: UIViewController {
     // MARK: - UI elements
@@ -22,8 +22,21 @@ class MovieDetailViewController: UIViewController {
         
         navigationItem.title = movie.title;
         
-        toggleBarButton(watchlistBarButtonItem, enabled: isWatchlist);
-        toggleBarButton(favoriteBarButtonItem, enabled: isFavorite);
+        toggleBarButton(watchlistBarButtonItem, enabled:isWatchlist);
+        toggleBarButton(favoriteBarButtonItem, enabled:isFavorite);
+        
+        // Note how associated value, posterPath, is created!
+        if let posterPath = movie.posterPath {
+            TMDBClient.downloadPosterImage(path:posterPath) {(data,error) in
+                guard let data = data else {
+                    return;
+                }
+                
+                // Set image:
+                let image = UIImage(data:data);
+                self.imageView.image = image;
+            }
+        }
     }
     
     @IBAction func watchlistButtonTapped(_ sender: UIBarButtonItem) {
@@ -31,7 +44,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     @IBAction func favoriteButtonTapped(_ sender: UIBarButtonItem) {
-        //TODO:
+        TMDBClient.markFavourites(movieId:movie.id, isFavourite:!isFavorite, completion:handleFavouritesResponse(success:error:));
     }
     
     
@@ -55,11 +68,22 @@ class MovieDetailViewController: UIViewController {
                 MovieModel.watchlist.append(movie);
             }
             
-            toggleBarButton(watchlistBarButtonItem, enabled:isWatchlist); //Updates UI:
+            toggleBarButton(watchlistBarButtonItem, enabled:isWatchlist); //Updates UI
         } else {
             print("ERROR: Failed to callback handleWatchlistResponse()!");
         }
     }
     
+    func handleFavouritesResponse(success:Bool, error:Error?) {
+        if success {
+            if isFavorite {
+                print("Do something");
+                MovieModel.favorites = MovieModel.favorites.filter() {$0 != self.movie;}
+            } else {
+                MovieModel.favorites.append(movie);
+            }
+            toggleBarButton(favoriteBarButtonItem, enabled:isFavorite); //Updates UI
+        }
+    }
     
 }

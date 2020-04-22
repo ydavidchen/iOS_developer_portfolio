@@ -52,6 +52,20 @@ extension WatchlistViewController: UITableViewDataSource,UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell")!;
         let movie = MovieModel.watchlist[indexPath.row];
         cell.textLabel?.text = movie.title;
+        
+        // Display image in table (not all images are downloaded once; instead, reusable cell):
+        if let posterPath = movie.posterPath {
+            // Perform download within ... (do SAME for favourites)
+            TMDBClient.downloadPosterImage(path:posterPath) {(data,error) in
+                guard let data = data else {
+                    return;
+                }
+                let image = UIImage(data:data);
+                cell.imageView?.image = image;
+                cell.setNeedsLayout(); //refresh cell
+            }
+        }
+        
         return cell;
     }
     

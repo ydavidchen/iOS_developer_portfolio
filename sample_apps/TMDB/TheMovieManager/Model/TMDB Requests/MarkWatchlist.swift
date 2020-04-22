@@ -8,7 +8,7 @@ import Foundation;
 
 struct MarkWatchlist: Codable {
     let mediaType: String;
-    let mediaId: Int; //see doc
+    let mediaId: Int;
     let watchlist: Bool;
     
     enum CodingKeys: String, CodingKey {
