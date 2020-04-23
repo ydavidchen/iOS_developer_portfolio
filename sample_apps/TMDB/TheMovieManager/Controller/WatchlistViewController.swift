@@ -52,6 +52,7 @@ extension WatchlistViewController: UITableViewDataSource,UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell")!;
         let movie = MovieModel.watchlist[indexPath.row];
         cell.textLabel?.text = movie.title;
+        cell.imageView?.image = UIImage(named:"PosterPlaceholder"); //placeholder image in Assets; will be overriden
         
         // Display image in table (not all images are downloaded once; instead, reusable cell):
         if let posterPath = movie.posterPath {

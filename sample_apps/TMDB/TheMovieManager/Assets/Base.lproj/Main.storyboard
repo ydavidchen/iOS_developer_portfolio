@@ -74,19 +74,22 @@
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="Wh6-Ej-5FW"/>
                                         </constraints>
-                                        <state key="normal" title="Login via Website"/>
+                                        <state key="normal" title="Login via website"/>
                                         <connections>
                                             <action selector="loginViaWebsiteTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="IYQ-h5-HYy"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This product uses the TMDb API but is not endorsed or certified by TMDb." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9EU-Nu-cBG">
-                                <rect key="frame" x="16" y="606" width="343" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISCLAIMER: This app uses TheMovieDB API but is neither endorsed nor approved by the API provider." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9EU-Nu-cBG">
+                                <rect key="frame" x="16" y="618" width="343" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="nX8-bo-rhv">
+                                <rect key="frame" x="177.5" y="492" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.0078431372550000003" green="0.70196078429999997" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -96,17 +99,20 @@
                             <constraint firstItem="SyQ-Nw-CjV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="BUC-Z8-Xca"/>
                             <constraint firstItem="6au-LF-Utu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="LyA-LB-78e"/>
                             <constraint firstItem="n8z-V4-qAW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Qb3-dY-kET"/>
+                            <constraint firstItem="nX8-bo-rhv" firstAttribute="top" secondItem="OHw-m7-7gh" secondAttribute="bottom" constant="44" id="Y3P-F6-ytr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9EU-Nu-cBG" secondAttribute="trailing" constant="16" id="YMD-so-pgt"/>
                             <constraint firstItem="n8z-V4-qAW" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="YXu-A4-gSA"/>
                             <constraint firstItem="9EU-Nu-cBG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="aMw-l6-3rG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6au-LF-Utu" secondAttribute="trailing" constant="16" id="c34-4Z-ddZ"/>
                             <constraint firstItem="SyQ-Nw-CjV" firstAttribute="top" secondItem="n8z-V4-qAW" secondAttribute="bottom" constant="8" id="l3s-Le-IHY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9EU-Nu-cBG" secondAttribute="bottom" constant="20" id="uUC-ZZ-la3"/>
+                            <constraint firstItem="nX8-bo-rhv" firstAttribute="centerX" secondItem="OHw-m7-7gh" secondAttribute="centerX" id="wU5-Rj-kxL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n8z-V4-qAW" secondAttribute="trailing" constant="16" id="yv3-3r-PNZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="nX8-bo-rhv" id="5ib-mI-UZU"/>
                         <outlet property="emailTextField" destination="qrT-hl-seK" id="kNU-Rr-pdO"/>
                         <outlet property="loginButton" destination="XfA-1k-xWc" id="gzO-wf-ODd"/>
                         <outlet property="loginViaWebsiteButton" destination="OHw-m7-7gh" id="Ghg-Tm-X1E"/>

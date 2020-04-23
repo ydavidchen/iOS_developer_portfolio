@@ -26,13 +26,13 @@ class MovieDetailViewController: UIViewController {
         toggleBarButton(favoriteBarButtonItem, enabled:isFavorite);
         
         // Note how associated value, posterPath, is created!
+        self.imageView.image = UIImage(named:"PosterPlaceholder");
         if let posterPath = movie.posterPath {
+            // Download & set image:
             TMDBClient.downloadPosterImage(path:posterPath) {(data,error) in
                 guard let data = data else {
                     return;
                 }
-                
-                // Set image:
                 let image = UIImage(data:data);
                 self.imageView.image = image;
             }
@@ -69,8 +69,6 @@ class MovieDetailViewController: UIViewController {
             }
             
             toggleBarButton(watchlistBarButtonItem, enabled:isWatchlist); //Updates UI
-        } else {
-            print("ERROR: Failed to callback handleWatchlistResponse()!");
         }
     }
     
@@ -82,6 +80,7 @@ class MovieDetailViewController: UIViewController {
             } else {
                 MovieModel.favorites.append(movie);
             }
+            
             toggleBarButton(favoriteBarButtonItem, enabled:isFavorite); //Updates UI
         }
     }

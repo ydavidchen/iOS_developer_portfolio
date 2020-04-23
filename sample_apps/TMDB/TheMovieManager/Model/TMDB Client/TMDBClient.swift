@@ -7,6 +7,7 @@ import Foundation;
 
 class TMDBClient {
     //MARK: - Authentication object
+    static let apiKey = APIKEY.apiKey;
     struct Auth {
         static var accountId = 0;
         static var requestToken = "";
@@ -16,7 +17,7 @@ class TMDBClient {
     //MARK: - Endpoints that rotatingly return URLs
     enum Endpoints {
         static let base = "https://api.themoviedb.org/3";
-        static let apiKeyParam = "?api_key=\(APIKEY.apiKey)"; //construct API key into required format
+        static let apiKeyParam = "?api_key=\(apiKey)"; //construct API key into required format
         
         // Cases for basic features:
         case getWatchlist;
@@ -140,15 +141,15 @@ class TMDBClient {
     }
     
     //MARK: - Advanced functionalities
-    class func search(query:String, completion: @escaping ([Movie],Error?) -> Void) {
+    class func search(query:String, completion: @escaping ([Movie],Error?) -> Void) -> URLSessionTask {
         // Called in SearchViewController.swift
-        taskForGETRequest(url:Endpoints.search(query).url, responseType:MovieResults.self) {(response,error) in
+        return taskForGETRequest(url:Endpoints.search(query).url, responseType:MovieResults.self) {(response,error) in
             if let response = response {
                 completion(response.results, nil);
             } else {
                 completion([], error);
             }
-        }
+        };
     }
     
     class func markWatchlist(movieId:Int, watchlist:Bool, completion: @escaping (Bool,Error?) -> Void) {
@@ -190,10 +191,11 @@ class TMDBClient {
         task.resume();
     }
     
+    
     /*
      MARK: - Reusable helper functions for re-factoring class-method code, for both basic & advanced functionalities
      */
-    class func taskForGETRequest<ResponseType:Decodable>(url:URL, responseType:ResponseType.Type, completion: @escaping (ResponseType?,Error?) -> Void) { //makes use of Swift Generics; NOTE SYNTAX!!!
+    class func taskForGETRequest<ResponseType:Decodable>(url:URL, responseType:ResponseType.Type, completion: @escaping (ResponseType?,Error?) -> Void) -> URLSessionTask { //makes use of Swift Generics; NOTE SYNTAX!!!
         let task = URLSession.shared.dataTask(with:url) {(data,response,error) in
             guard let data = data else {
                 completion(nil, error);
@@ -207,12 +209,23 @@ class TMDBClient {
                     completion(responseObject, nil);
                 }
             } catch {
-                DispatchQueue.main.async {
-                    completion(nil, error);
+                do {
+                    // Optimization: Let user know which kind of error, and return
+                    let errorResponse = try decoder.decode(TMDBResponse.self, from:data);
+                    DispatchQueue.main.async {
+                        completion(nil, errorResponse); //JSON parsing error
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(nil, error);
+                    }
                 }
             }
         }
         task.resume();
+        
+        // Return task s.t. it can be CANCELLED elsewhere
+        return task;
     }
     
     class func taskForPOSTRequest<RequestType:Encodable, ResponseType:Decodable>(url:URL, responseType:ResponseType.Type, body:RequestType, completion: @escaping (ResponseType?,Error?) -> Void) {
@@ -229,20 +242,26 @@ class TMDBClient {
                 return;
             }
 
+            let decoder = JSONDecoder();
             do {
-                let decoder = JSONDecoder();
                 let responseObject = try decoder.decode(ResponseType.self, from:data);
                 DispatchQueue.main.async {
                     completion(responseObject, nil);
                 }
             } catch {
-                DispatchQueue.main.async {
-                    completion(nil, error);
+                do {
+                    let errorResponse = try decoder.decode(TMDBResponse.self, from:data);
+                    DispatchQueue.main.async {
+                        completion(nil, errorResponse); //JSON parsing error
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(nil, error);
+                    }
                 }
             }
         }
         task.resume();
-        
     }
     
     class func taskForDELETERequest<RequestType:Encodable, ResponseType:Decodable>(url:URL, responseType:ResponseType.Type, body:RequestType, completion:@escaping () -> Void) {

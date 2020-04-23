@@ -15,3 +15,12 @@ struct TMDBResponse: Codable {
         case statusMessage = "status_message";
     }
 }
+
+/*
+Extension to provide error response
+*/
+extension TMDBResponse: LocalizedError {
+    var errorDescription: String? {
+        return statusMessage;
+    }
+}

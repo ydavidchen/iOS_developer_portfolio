@@ -27,7 +27,7 @@ class AccountClient {
         }
         
         var url: URL {
-            return URL(string:stringValue)!
+            return URL(string:stringValue)!;
         }
     }
     
@@ -92,6 +92,7 @@ class AccountClient {
             let newData = data?.subdata(in:range);
             print(String(data: newData!, encoding: .utf8)!);
         }
+        
         task.resume();
     }
 }

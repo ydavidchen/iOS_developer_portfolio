@@ -11,6 +11,7 @@ class SearchViewController: UIViewController {
 
     var movies = [Movie]();
     var selectedIndex = 0;
+    var currentSearchTask: URLSessionTask?;
     
     override func prepare(for segue:UIStoryboardSegue, sender:Any?) {
         if segue.identifier == "showDetail" {
@@ -25,8 +26,12 @@ Extension to handle search bar UI elements
 */
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //TODO:
-        TMDBClient.search(query:searchText) { (movies, error) in
+        // Always begin by CANCELLING search task, if any (hint: use OPTIONAL)
+        currentSearchTask?.cancel(); //note synatx
+        
+        // Update Search Task:
+        currentSearchTask = TMDBClient.search(query:searchText) {(movies, error) in
+            // Recall the search() method will return URL task
             self.movies = movies;
             self.tableView.reloadData();
         }
@@ -47,23 +52,19 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 1;
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return movies.count;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell")!
-        
-        let movie = movies[indexPath.row]
-        
-        cell.textLabel?.text = "\(movie.title) - \(movie.releaseYear)"
-        
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell")!;
+        let movie = movies[indexPath.row];
+        cell.textLabel?.text = "\(movie.title) - \(movie.releaseYear)";
+        return cell;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
